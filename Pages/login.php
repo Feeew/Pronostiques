@@ -31,7 +31,7 @@ if (isset($_POST['password']) && isset($_POST['username']))
 		$exist = $result[0]['exist'];
 		
 		if($exist){
-			$sql = "SELECT ID FROM USERS WHERE USERNAME = '".strtoupper($username)."'";
+			$sql = "SELECT ID FROM Users WHERE USERNAME = '".strtoupper($username)."'";
 			$stmt = $db->prepare($sql);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
