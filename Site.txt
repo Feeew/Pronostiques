@@ -1,0 +1,25 @@
+Your Account Details
+
+Your account is now active.
+Main Hosting Details
+Control panel username
+b6_14384255
+Control panel password	**********
+Control panel URL
+cpanel.byethost6.com
+MySQL username
+b6_14384255
+MySQL password
+**********
+MySQL hostname
+sql300.byethost6.com
+FTP username
+b6_14384255
+FTP password
+**********
+FTP host name	ftp.byethost6.com
+
+
+Your Website URL's
+Home page
+http://shyrel.byethost6.com

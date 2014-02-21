@@ -1,0 +1,80 @@
+﻿body{
+	/*background:url(../img/test.jpg);*/
+	background:#f2f2f2;
+}
+.caret{
+	margin-left:8px !important;
+}
+.navbar-inner{
+	padding-left:50px;
+}
+h1{
+	font-family: 'Architects Daughter', cursive;
+}
+#wrapper{
+	margin-left:50px;
+	margin-right:37px;
+}
+.un_tier{
+	width:30px;
+	text-align:center !important;
+}
+.un_demi{
+	width:45px;
+	text-align:center !important;
+}
+.connect_header{
+	width:177px;
+	float:right;
+}
+.space_right_10px{
+	margin-right:10px;
+}
+.input_200px{
+	width:200px !important;
+}
+.tournoi_inscription{
+	cursor:default;
+	width:250px !important;
+}
+.result, .correct, .incorrect, .points{
+	text-align: center !important;
+	width:40px;
+}
+.result input{
+	width:21px;
+	margin: -4px -8px;
+	text-align: center;
+}
+.connectedAs{
+	margin-top:15px;
+	color:#777;
+}
+.tournoi_pronostic{
+	height:auto !important;
+}
+.glyphicon-pencil{
+	margin-left:4px;
+}
+.final_results{
+	width:200px !important;
+	height:auto !important;
+}
+#final_results{
+	height:auto !important;
+}
+#final_results td{
+	text-align: center;
+}
+.correct{
+	background-color:green;
+}
+.incorrect{
+	background-color:red;
+}
+.addUser{
+	width:250px;
+}
+.unirow{
+	width:100px;
+}
