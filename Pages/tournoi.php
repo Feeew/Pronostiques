@@ -70,7 +70,7 @@ else{
 						$scores = $db->prepare("SELECT Score1, Score2 FROM Pronostic WHERE ID_Tournoi = ".$tournoi_id." AND ID_user = ".$row2["ID"]." AND ID_Match = ".$row1["ID"]." ORDER BY ID_User");
 						$scores->execute();
 						$result_scores = $scores->fetchAll();
-						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s")) ? "1" : "0";
+						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s", strtotime("+1 day"))) ? "1" : "0";
 						$score1 = $result_scores[0]["Score1"];
 						$score2 = $result_scores[0]["Score2"];
 						$points = "-";
@@ -103,11 +103,11 @@ else{
 <div class="CSSTableGenerator final_results">
 <table id="final_results"><tr><td>Joueur</td><td>Score</td></tr>
 <?php
+
 	foreach($tab_scores as $key=>$value){
-		?>
-			<tr><td><?php echo $key;?></td><td><?php echo $value;?></td></tr>
-		<?
+			echo "<tr><td>".$key."</td><td>".$value."</td></tr>";
 	}
+	
 ?>
 </table>
 </div>
