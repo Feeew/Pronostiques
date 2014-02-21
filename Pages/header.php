@@ -40,7 +40,7 @@
 		if($_SESSION['connected'] == true){
 			?>
 				<ul class="nav navbar-nav navbar-right">
-				  <li class="connectedAs">Vous êtes connectés en tant que <b><span id="username"><?php echo $_SESSION['username'];?></span></b>.</li>
+				  <li class="connectedAs">Vous êtes connecté en tant que <b><span id="username"><?php echo $_SESSION['username'];?></span></b>.</li>
 				  <li><a href="../Scripts/logout.php">Se déconnecter</a></li>
 				</ul>
 			<?php

@@ -54,14 +54,14 @@ else
 			<div class="form-group">
 				<div class="input-group addUser">
 				  <span class="input-group-addon" onclick="document.getElementById('username').focus();"><div class="glyphicon glyphicon-user"></div></span>
-				  <input type="text" id="username" tabindex=1 class="form-control" name="username" placeholder="Nom de compte" required>
+				  <input type="text" id="username" tabindex=3 class="form-control" name="username" placeholder="Nom de compte" required>
 				</div>
 				<div class="input-group addUser">
 				  <span onclick="document.getElementById('password').focus();" class="input-group-addon"><div class="glyphicon glyphicon-lock"></div></span>
-				  <input tabindex=2 id="password" type="password" name="password" class="form-control" placeholder="Mot de passe" required>
+				  <input tabindex=4 id="password" type="password" name="password" class="form-control" placeholder="Mot de passe" required>
 				</div>
 			</div>
-			<button tabindex=3 type="submit" class="btn btn-default">S'inscrire</button>
+			<button tabindex=5 type="submit" class="btn btn-default">S'inscrire</button>
 		  </form>
 
 	<?php
