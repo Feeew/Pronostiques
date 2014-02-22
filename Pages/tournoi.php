@@ -61,7 +61,9 @@ else{
 		
 			date_default_timezone_set('CET');
 			foreach($result_equipes as $row1){
-				if(date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"])))
+				$score_match1 = ($row1["score1"] != null) ? $row1["score1"] : "-";
+				$score_match2 = ($row1["score2"] != null) ? $row1["score2"] : "-";
+				if((date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"]))) && ($score_match1!="-" && $score_match2!="-"))
 				echo "<tr class='yellow_line' id=".$row1["ID"].">";
 				else echo "<tr id=".$row1["ID"].">";
 				echo "
@@ -69,8 +71,6 @@ else{
 							<td class='unirow'>".$row1["Equipe1"]."</td>
 							<td class='unirow'>".$row1["Equipe2"]."</td>
 				";
-				$score_match1 = ($row1["score1"] != null) ? $row1["score1"] : "-";
-				$score_match2 = ($row1["score2"] != null) ? $row1["score2"] : "-";
 				foreach($result_joueurs as $row2){
 						$scores = $db->prepare("SELECT Score1, Score2 FROM Pronostic WHERE ID_Tournoi = ".$tournoi_id." AND ID_user = ".$row2["ID"]." AND ID_Match = ".$row1["ID"]." ORDER BY ID_User");
 						$scores->execute();
@@ -109,7 +109,7 @@ else{
 <table id="final_results"><tr><td>Joueur</td><td>Score</td></tr>
 <?php
 
-	asort($tab_scores);
+	arsort($tab_scores);
 	
 	foreach($tab_scores as $key=>$value){
 			echo "<tr><td>".$key."</td><td>".$value."</td></tr>";
