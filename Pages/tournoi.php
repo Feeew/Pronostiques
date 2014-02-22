@@ -58,8 +58,12 @@ else{
 			</tr>
 		
 		<?php 
+		
 			foreach($result_equipes as $row1){
-				echo "<tr id=".$row1["ID"].">
+				if(date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"])))
+				echo "<tr class='yellow_line' id=".$row1["ID"].">";
+				else echo "<tr id=".$row1["ID"].">";
+				echo "
 							<td class='unirow'>".date("d-m-Y", strtotime($row1["Date"]))."</td>
 							<td class='unirow'>".$row1["Equipe1"]."</td>
 							<td class='unirow'>".$row1["Equipe2"]."</td>
@@ -70,7 +74,7 @@ else{
 						$scores = $db->prepare("SELECT Score1, Score2 FROM Pronostic WHERE ID_Tournoi = ".$tournoi_id." AND ID_user = ".$row2["ID"]." AND ID_Match = ".$row1["ID"]." ORDER BY ID_User");
 						$scores->execute();
 						$result_scores = $scores->fetchAll();
-						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s", strtotime("+1 day"))) ? "1" : "0";
+						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s", strtotime("+2 hour"))) ? "1" : "0";
 						$score1 = $result_scores[0]["Score1"];
 						$score2 = $result_scores[0]["Score2"];
 						$points = "-";
@@ -104,6 +108,8 @@ else{
 <table id="final_results"><tr><td>Joueur</td><td>Score</td></tr>
 <?php
 
+	asort($tab_scores);
+	
 	foreach($tab_scores as $key=>$value){
 			echo "<tr><td>".$key."</td><td>".$value."</td></tr>";
 	}
