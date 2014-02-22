@@ -59,6 +59,7 @@ else{
 		
 		<?php 
 		
+			date_default_timezone_set('CET');
 			foreach($result_equipes as $row1){
 				if(date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"])))
 				echo "<tr class='yellow_line' id=".$row1["ID"].">";
@@ -74,7 +75,7 @@ else{
 						$scores = $db->prepare("SELECT Score1, Score2 FROM Pronostic WHERE ID_Tournoi = ".$tournoi_id." AND ID_user = ".$row2["ID"]." AND ID_Match = ".$row1["ID"]." ORDER BY ID_User");
 						$scores->execute();
 						$result_scores = $scores->fetchAll();
-						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s", strtotime("+2 hour"))) ? "1" : "0";
+						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s", strtotime("+1 hour"))) ? "1" : "0";
 						$score1 = $result_scores[0]["Score1"];
 						$score2 = $result_scores[0]["Score2"];
 						$points = "-";
