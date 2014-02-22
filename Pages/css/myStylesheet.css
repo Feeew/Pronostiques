@@ -70,11 +70,14 @@ h1{
 	background-color:green;
 }
 .incorrect{
-	background-color:red;
+	background-color:#b00;
 }
 .addUser{
 	width:250px;
 }
 .unirow{
 	width:100px;
+}
+.yellow_line td{
+	background:#f9c66d;
 }
