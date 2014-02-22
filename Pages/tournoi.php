@@ -50,7 +50,7 @@ else{
 				<?php
 					foreach($result_joueurs as $row){
 						$tab_scores[$row["Username"]] = 0;
-						if(strtoupper($row["Username"]) == strtoupper($_SESSION['username'])) echo "<td colspan='3' id=".strtoupper($row['Username']).">".$row["Username"]."<span onclick='mod_score(\"".strtoupper($row['Username'])."\")' class='glyphicon glyphicon-pencil'></span></td>";
+						if(strtoupper($row["Username"]) == strtoupper($_SESSION['username'])) echo "<td colspan='3' id=".strtoupper($row['Username']).">".$row["Username"]."<span onclick='mod_score(\"".strtoupper($row['Username'])."\")' style='float:left;' class='glyphicon glyphicon-pencil'></span></td>";
 						else echo "<td colspan='3'>".$row["Username"]."</td>";
 					}
 					echo "<td colspan='2'>Résultats</td>";
