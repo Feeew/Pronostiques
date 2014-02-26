@@ -18,11 +18,10 @@ include 'header.php';
 
 <div id="wrapper">
 
-
 <div id="content">
 <?php 
 if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false){
-	echo "<h1>Bienvenue !</h1>";
+	echo "<h1>Bienvenue !!</h1>";
 }
 else{
 	$stmt = $db->prepare("SELECT * FROM Tournoi WHERE ID IN (Select ID_Tournoi FROM Inscriptions WHERE ID_User = (SELECT ID FROM Users WHERE Username = '".strtoupper($_SESSION["username"])."'))");
