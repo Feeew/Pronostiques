@@ -31,7 +31,7 @@ function mod_score(className){
 	for(var i = 0; i<tds.length; i++){
 		tds[i].innerHTML = "<input type='int' value='"+tds[i].innerHTML+"' onkeypress='add_to_tab("+i+")' maxlength=2/>";
 	}
-	document.getElementById(className).getElementsByTagName("span")[0].onclick=function(){valid_score(className)};
+	document.getElementById(className).onclick=function(){valid_score(className)};
 }
 
 //On clique sur "Valider" --> On transforme les inputs en case
@@ -58,7 +58,7 @@ function valid_score(className){
 		}
 	}
 	send_to_sql();
-	document.getElementById(className).getElementsByTagName("span")[0].onclick=function(){mod_score(className)};
+	document.getElementById(className).onclick=function(){mod_score(className)};
 	input_modified = [];
 }
 

@@ -81,3 +81,6 @@ h1{
 .yellow_line td{
 	background:#f9c66d;
 }
+.th_edit{
+	padding-right:20px !important;
+}
