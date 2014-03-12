@@ -39,7 +39,13 @@ else{
 	$joueurs->execute();
 	$result_joueurs = $joueurs->fetchAll();
 	
+	//Ancienne fonction avec l'icone "crayon" pour modifier
+	//if(strtoupper($row["Username"]) == strtoupper($_SESSION['username']) || 1==1) echo "<td colspan='3' id=".strtoupper($row['Username'])."><span class='th_edit'>".$row["Username"]."</span><span onclick='mod_score(\"".strtoupper($row['Username'])."\")' style='float:right;' class='glyphicon glyphicon-pencil'></span></td>";
+		
 	?>
+		<br />
+		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Comment modifier son score : </h4>
+		<p>Cliquez sur votre pseudo dans le tableau (Noir gras souligné). Les scores des matchs non-joués deviennent alors modifiables. Cliquez à nouveau sur votre pseudo pour valider les scores.</p>
 		<br/>
 		<div class="CSSTableGenerator" >
 		<table id="tournoi_pronostic" class='tournoi_pronostic'>
@@ -50,7 +56,8 @@ else{
 				<?php
 					foreach($result_joueurs as $row){
 						$tab_scores[$row["Username"]] = 0;
-						if(strtoupper($row["Username"]) == strtoupper($_SESSION['username'])) echo "<td colspan='3' id=".strtoupper($row['Username']).">".$row["Username"]."<span onclick='mod_score(\"".strtoupper($row['Username'])."\")' style='float:left;' class='glyphicon glyphicon-pencil'></span></td>";
+						if(strtoupper($row["Username"]) == strtoupper($_SESSION['username'])) 
+							echo "<td colspan='3' id='".$row['Username']."' style='font-weight:bold; color:black; text-decoration:underline;' onclick='mod_score(\"".strtoupper($row['Username'])."\")'>".$row["Username"]."</td>";
 						else echo "<td colspan='3'>".$row["Username"]."</td>";
 					}
 					echo "<td colspan='2'>Résultats</td>";
