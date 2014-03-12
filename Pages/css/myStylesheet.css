@@ -25,7 +25,6 @@ h1{
 }
 .connect_header{
 	width:177px;
-	float:right;
 }
 .space_right_10px{
 	margin-right:10px;
@@ -83,4 +82,22 @@ h1{
 }
 .th_edit{
 	padding-right:20px !important;
+}
+.tournoi_name{
+	display:table-cell;
+	position:relative;
+	float:left;
+	background:#eee;
+	height:34px;
+	padding:8px 12px;
+	font-size:14px;
+	color:#555;
+	border:1px solid #ccc;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	width:240px;
+	border-radius: 0 7px 7px 0;
+	cursor:pointer;
 }

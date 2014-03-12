@@ -80,7 +80,7 @@ if (!isset($_POST['tournoi_id']))
 							  <span class='input-group-btn'>
 									<button onclick=submit_inscription_tournoi(".$tournois[$i]["ID"].") class='btn btn-default' type='button'>S'inscrire</button>
 							  </span>
-							  <input type='text' disabled value='".$tournois[$i]['Nom']."' class='form-control tournoi_inscription'>
+							  <span class='tournoi_name' onclick='submit_inscription_tournoi(\"".$tournois[$i]['ID']."\")'>".$tournois[$i]['Nom']."</span>
 							</div>
 						  </div>
 						</div>

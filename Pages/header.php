@@ -51,15 +51,16 @@
 		  <ul class="nav navbar-nav navbar-right">
 		  <li><a href="addUser.php">Pas encore inscrit ?</a></li>
 		  </ul>
-		  <form method="post" action="login.php" class="navbar-form navbar-right">
+		  <form method="post" action="login.php" class="navbar-form" style="float:right;">
 			<div class="form-group">
-				<div class="input-group connect_header">
-				  <span onclick="document.getElementById('password').focus();" class="input-group-addon"><div class="glyphicon glyphicon-lock"></div></span>
-				  <input tabindex=2 id="password" type="password" name="password" class="form-control" placeholder="Mot de passe" required>
-				</div>
-				<div class="input-group connect_header space_right_10px">
+				<div class="input-group connect_header space_right_10px" style="float:left;">
 				  <span class="input-group-addon" onclick="document.getElementById('username').focus();"><div class="glyphicon glyphicon-user"></div></span>
 				  <input type="text" id="username" tabindex=1 class="form-control" name="username" placeholder="Nom de compte" required>
+				</div>
+				
+				<div class="input-group connect_header space_right_10px" style="float:right;">
+				  <span onclick="document.getElementById('password').focus();" class="input-group-addon"><div class="glyphicon glyphicon-lock"></div></span>
+				  <input tabindex=2 id="password" type="password" name="password" class="form-control" placeholder="Mot de passe" required>
 				</div>
 			</div>
 			<button tabindex=3 type="submit" class="btn btn-default">Se connecter</button>

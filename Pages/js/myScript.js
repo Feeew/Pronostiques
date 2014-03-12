@@ -111,3 +111,7 @@ function send_to_sql(){
 		}
 	});
 }
+
+function inscription(){
+	alert("lol");
+}
