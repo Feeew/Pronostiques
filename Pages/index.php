@@ -62,7 +62,8 @@ else{
 											echo "<button onclick='go_to_tournoi(\"".$tournois[$i]['ID']."\",\"".str_replace(' ', '_', $tournois[$i]['Nom'])."\")' class='btn btn-default' type='button'>Go !</button>";
 										?>
 									  </span>
-									  <input type="text" disabled value='<?php echo $tournois[$i]['Nom'];?>' class="form-control tournoi_inscription">
+									  <!--<input type="text" disabled onclick="inscrion();" value='<?php echo $tournois[$i]['Nom'];?>' class="form-control tournoi_inscription">-->
+									  <span class="tournoi_name" onclick='go_to_tournoi("<?php echo $tournois[$i]['ID'];?>", "<?php echo str_replace(' ', '_', $tournois[$i]['Nom'])?>")'><?php echo $tournois[$i]['Nom'];?></span>
 									</div><!-- /input-group -->
 								  </div><!-- /.col-lg-6 -->
 								</div><!-- /.row -->
