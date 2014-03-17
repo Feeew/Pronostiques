@@ -47,20 +47,20 @@ else{
 		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Comment modifier son score : </h4>
 		<p>Cliquez sur votre pseudo dans le tableau (Noir gras souligné). Les scores des matchs non-joués deviennent alors modifiables. Cliquez à nouveau sur votre pseudo pour valider les scores.</p>
 		<br/>
-		<div class="CSSTableGenerator" >
+		<div class="Tableau">
 		<table id="tournoi_pronostic" class='tournoi_pronostic'>
 			<tr>
-				<td>Date</td>
-				<td>Equipe 1</td>
-				<td>Equipe 2</td>
+				<th class='th_date'>Date</th>
+				<th class='th_team'>Equipe 1</th>
+				<th class='th_team'>Equipe 2</th>
 				<?php
 					foreach($result_joueurs as $row){
 						$tab_scores[$row["Username"]] = 0;
 						if(strtoupper($row["Username"]) == strtoupper($_SESSION['username'])) 
-							echo "<td colspan='3' id='".$row['Username']."' style='font-weight:bold; color:black; text-decoration:underline;' onclick='mod_score(\"".strtoupper($row['Username'])."\")'>".$row["Username"]."</td>";
-						else echo "<td colspan='3'>".$row["Username"]."</td>";
+							echo "<th colspan='3' class='th_joueur' id='".$row['Username']."' style='font-weight:bold; color:black; text-decoration:underline;' onclick='mod_score(\"".strtoupper($row['Username'])."\")'>".$row["Username"]."</th>";
+						else echo "<th class='th_joueur' colspan='3'>".$row["Username"]."</th>";
 					}
-					echo "<td colspan='2'>Résultats</td>";
+					echo "<th colspan='2' class='th_resultat'>Résultats</th>";
 			?>
 			</tr>
 		
@@ -86,24 +86,24 @@ else{
 						$score1 = $result_scores[0]["Score1"];
 						$score2 = $result_scores[0]["Score2"];
 						$points = "-";
-						$str_points = "<td class='points'>".$points."</td>";
+						$str_points = "<td class='points case_result'>".$points."</td>";
 						if($match_termine==1 && ($score1!="-" || $score2!="-")){
 							if((($score_match1-$score_match2)>0 && ($score1-$score2)>0) || (($score_match2-$score_match1)>0 && ($score2-$score1)>0)) 
 							{
 								$points = 3;
-								$str_points="<td class='correct'>".$points."</td>";
+								$str_points="<td class='correct case_result'>".$points."</td>";
 							}
 							else{
 								$points=0;
-								$str_points="<td class='incorrect'>".$points."</td>";
+								$str_points="<td class='incorrect case_result'>".$points."</td>";
 							}
 						}
-						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) echo "<td class='result ".$row2["Username"]."'>".$score1."</td><td class='result ".$row2["Username"]."'>".$score2."</td>".$str_points;
-						else echo "<td class='result'>".$score1."</td><td class='result'>".$score2."</td>".$str_points;
+						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) echo "<td class='result case_result ".$row2["Username"]."'>".$score1."</td><td class='result case_result ".$row2["Username"]."'>".$score2."</td>".$str_points;
+						else echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
 
 						if($points==3) $tab_scores[$row2["Username"]] = $tab_scores[$row2["Username"]] + $points;
 				}
-				echo "<td class='result'>".$score_match1."</td><td class='result'>".$score_match2."</td></tr>";
+				echo "<td class='result case_result'>".$score_match1."</td><td class='result case_result'>".$score_match2."</td></tr>";
 			}
 	}
 ?>
@@ -112,8 +112,8 @@ else{
 
 <br /><br />
 
-<div class="CSSTableGenerator final_results">
-<table id="final_results"><tr><td>Joueur</td><td>Score</td></tr>
+<div class="final_results tableau" style="margin:0">
+<table id="final_results" class="tournoi_pronostic"><tr><th class='th_joueur' style="border-right:1px solid black">Joueur</th><th>Score</th></tr>
 <?php
 
 	arsort($tab_scores);
