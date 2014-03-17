@@ -1,7 +1,6 @@
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 <link href="css/myStylesheet.css" rel="stylesheet">
 	
 
@@ -21,7 +20,7 @@
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	  <ul class="nav navbar-nav">
-		<li class="active"><a href="index.php">Accueil</a></li>
+		<li><a href="index.php">Accueil</a></li>
 		<li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournois<b class="caret"></b></a>
 		  <ul class="dropdown-menu">
@@ -31,6 +30,7 @@
 			<li><a href="index.php">Historique des tournois</a></li>
 		  </ul>
 		</li>
+		<li><a href="index.php">Suggestions</a></li>
 		<li><a href="index.php">Contact</a></li>
 	  </ul>
 
@@ -39,7 +39,7 @@
 		if($_SESSION['connected'] == true){
 			?>
 				<ul class="nav navbar-nav navbar-right">
-				  <li class="connectedAs">Vous êtes connecté en tant que <b><span id="username"><?php echo $_SESSION['username'];?></span></b>.</li>
+				  <li class="connectedAs">Vous êtes connecté en tant que <b><span id="username"><?php echo $_SESSION['username'];?></span></b>.&nbsp;&nbsp;</li>
 				  <li><a href="../Scripts/logout.php">Se déconnecter</a></li>
 				</ul>
 			<?php
