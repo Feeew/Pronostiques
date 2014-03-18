@@ -1,6 +1,5 @@
 <?php
 session_start();
-include '../Scripts/test_session.php';
 ?>
 <html>
 <head>

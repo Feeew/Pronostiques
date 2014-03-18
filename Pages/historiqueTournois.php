@@ -39,7 +39,7 @@ include 'header.php';
 	}
 
 	?>
-		<h1>Mes tournois</h1>
+		<h1>Historique des tournois</h1>
 		<br/>
 		<?php 
 		if(count($tournois) == 0){ 
