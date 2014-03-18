@@ -5,7 +5,7 @@ include '../Scripts/global.php';
 
 if(isset($_SESSION['connected'])){
 	if($_SESSION['connected'] == true){
-		header('Location: index.php');
+		header('Location: ../Pages/index.php');
 	}
 }
 
@@ -38,16 +38,16 @@ if (isset($_POST['password']) && isset($_POST['username']))
 			$_SESSION['connected'] = true;
 			$_SESSION['username'] = $username;
 			$_SESSION['user_id'] = $result[0]["ID"];
-			header('Location: index.php');
+			header('Location: ../Pages/index.php');
 		}
-		else header('Location: index.php?err=1');;
+		else header('Location: ../Pages/index.php?err=1');;
 		
 	}
 	catch(Exception $e){
-		header('Location: index.php?err=3');
+		header('Location: ../Pages/index.php?err=3');
 	}
 }
 else
 {
-		header('Location: index.php?err=2');
+		header('Location: ../Pages/index.php?err=2');
 }

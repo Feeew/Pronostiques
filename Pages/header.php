@@ -27,11 +27,11 @@
 			<li><a href="mesTournois.php">Mes tournois actuels</a></li>
 			<li class="divider"></li>
 			<li><a href="inscription_tournoi.php">S'inscrire à un tournoi</a></li>
-			<li><a href="index.php">Historique des tournois</a></li>
+			<li><a href="historiqueTournois.php">Historique des tournois</a></li>
 		  </ul>
 		</li>
-		<li><a href="index.php">Suggestions</a></li>
-		<li><a href="index.php">Contact</a></li>
+		<li><a href="Suggestion.php">Suggestions</a></li>
+		<li><a href="contact.php">Contact</a></li>
 	  </ul>
 
 	<?php
@@ -50,19 +50,19 @@
 		  <ul class="nav navbar-nav navbar-right">
 		  <li><a href="addUser.php">Pas encore inscrit ?</a></li>
 		  </ul>
-		  <form method="post" action="login.php" class="navbar-form" style="float:right;">
+		  <form method="post" action="../Scripts/login.php" class="navbar-form" style="float:right;">
 			<div class="form-group">
 				<div class="input-group connect_header space_right_10px" style="float:left;">
 				  <span class="input-group-addon" onclick="document.getElementById('username').focus();"><div class="glyphicon glyphicon-user"></div></span>
-				  <input type="text" id="username" tabindex=1 class="form-control" name="username" placeholder="Nom de compte" required>
+				  <input type="text" style="height:39px;" id="username" tabindex=1 class="form-control" name="username" placeholder="Nom de compte" required>
 				</div>
 				
 				<div class="input-group connect_header space_right_10px" style="float:right;">
 				  <span onclick="document.getElementById('password').focus();" class="input-group-addon"><div class="glyphicon glyphicon-lock"></div></span>
-				  <input tabindex=2 id="password" type="password" name="password" class="form-control" placeholder="Mot de passe" required>
+				  <input tabindex=2 id="password" style="height:39px;" type="password" name="password" class="form-control" placeholder="Mot de passe" required>
 				</div>
 			</div>
-			<button tabindex=3 type="submit" class="btn btn-default">Se connecter</button>
+			<button tabindex=3 type="submit" class="btn btn-primary">Se connecter</button>
 		  </form>
 		<?php
 	}

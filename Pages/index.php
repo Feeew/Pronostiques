@@ -3,6 +3,7 @@ session_start();
 ?>
 <html>
 <HEAD>
+	<title>Accueil</title>
 </HEAD>
 <body>
 
@@ -25,6 +26,17 @@ if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false){
 }
 else{
 	?><h1>Bonjour <?php echo $_SESSION["username"]; ?> !</h1><?php
+}
+
+if(isset($_GET["err"])){
+	$erreur = $_GET["err"];
+	switch($erreur){
+		case "1": echo "<h4 style='color:red;'>Cet utilisateur n'existe pas.</h4>";break;
+		case "2": echo "<h4 style='color:red;'>Merci de renseigner tous les champs.</h4>";break;
+		case "3": echo "<h4 style='color:red;'>Une erreur s'est produite, merci de contacter l'administrateur.</h4>";break;
+		case "4": echo "<h4 style='color:red;'>Votre session a expir&eacute;, merci de vous reconnecter.</h4>";break;
+		default: break;
+	}	
 }
 
 ?>
