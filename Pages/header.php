@@ -24,7 +24,7 @@
 		<li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournois<b class="caret"></b></a>
 		  <ul class="dropdown-menu">
-			<li><a href="index.php">Mes tournois actuels</a></li>
+			<li><a href="mesTournois.php">Mes tournois actuels</a></li>
 			<li class="divider"></li>
 			<li><a href="inscription_tournoi.php">S'inscrire à un tournoi</a></li>
 			<li><a href="index.php">Historique des tournois</a></li>

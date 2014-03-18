@@ -64,7 +64,7 @@ if (!isset($_POST['tournoi_id']))
 	}
 	
 	if(count($tournois) == 0){
-		echo "<h2 style='color:red'>Aucun tournoi n'est disponible!</h2>";
+		echo "<h4>Aucun tournoi n'est disponible pour le moment.</h4>";
 	}
 	else{
 		echo "<br /><h2>Tournois disponibles : </h2>";
