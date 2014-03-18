@@ -194,3 +194,7 @@ h1{
 	border-top-right-radius:25px;
 	box-shadow: 6px 6px 6px rgb(126, 126, 126);
 }
+
+.btn-primary{
+	border:1px solid #02325f;
+}

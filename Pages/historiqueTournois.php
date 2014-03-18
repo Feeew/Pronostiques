@@ -1,14 +1,13 @@
 <?php 
 session_start();
 include '../Scripts/test_session.php';
-include '../Scripts/test_session.php';
 if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false){
 	header('location', 'index.php');
 }
 ?>
 <html>
 <HEAD>
-	<title>Mes tournois</title>
+	<title>Historique</title>
 </HEAD>
 <body>
 
@@ -26,7 +25,7 @@ include 'header.php';
 
 <div id="content">
 	<?php
-	$stmt = $db->prepare("SELECT * FROM Tournoi WHERE ID IN (Select ID_Tournoi FROM Inscriptions WHERE ID_User = (SELECT ID FROM Users WHERE Username = '".strtoupper($_SESSION["username"])."')) AND DateFin > Now()");
+	$stmt = $db->prepare("SELECT * FROM Tournoi WHERE DateFin < Now()");
 	$stmt->execute();
 	$result = $stmt->fetchAll();
 	
@@ -44,11 +43,11 @@ include 'header.php';
 		<br/>
 		<?php 
 		if(count($tournois) == 0){ 
-			echo "<h4> Vous ne participez à aucun tournoi actuellement.</h4>";
+			echo "<h4>Aucun tournoi n'est présent dans l'historique.</h4>";
 		}
 		else{ 
 			?>
-			<h4>Tournois auxquels vous participez :</h4><br />
+			<h4>Tous les tournois terminés :</h4><br />
 			<form action='tournoi.php' id='form_tournoi' method='post'>
 			<table>
 			<?php

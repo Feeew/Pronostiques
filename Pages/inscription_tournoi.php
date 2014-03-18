@@ -1,5 +1,6 @@
 <?php
 session_start();
+include '../Scripts/test_session.php';
 
 include '../Scripts/global.php';
 
@@ -34,6 +35,7 @@ if (isset($_POST['tournoi_id']))
 ?>
 <html>
 <head>
+	<title>Inscription à un tournoi</title>
 </head>
 <body>
 
