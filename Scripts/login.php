@@ -38,6 +38,14 @@ if (isset($_POST['password']) && isset($_POST['username']))
 			$_SESSION['connected'] = true;
 			$_SESSION['username'] = $username;
 			$_SESSION['user_id'] = $result[0]["ID"];
+
+			/*ECRITURE DANS LA TABLE DE LOG*/
+			$sql = $db->prepare("INSERT INTO Logs (login, IP, Connect_date) VALUES (:username, :ip, :CDate)");
+			$result = $sql->execute(array(
+				'username'	=> $username,
+				'ip'	=> $_SERVER['REMOTE_ADDR'],
+				'CDate' => date('Y-m-d H:m:s')
+			));
 			header('Location: ../Pages/index.php');
 		}
 		else header('Location: ../Pages/index.php?err=1');;
