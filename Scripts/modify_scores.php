@@ -1,5 +1,5 @@
 <?php
-session_start();
+include '../Pages/session_start.php';
 
 include 'global.php';
 

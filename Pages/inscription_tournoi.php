@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'session_start.php';
 include '../Scripts/test_session.php';
 
 include '../Scripts/global.php';
