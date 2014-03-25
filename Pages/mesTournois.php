@@ -1,7 +1,6 @@
 <?php 
 include 'session_start.php';
 include '../Scripts/test_session.php';
-include '../Scripts/test_session.php';
 if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false){
 	header('location', 'index.php');
 }
@@ -44,7 +43,7 @@ include 'header.php';
 		<br/>
 		<?php 
 		if(count($tournois) == 0){ 
-			echo "<h4> Vous ne participez à aucun tournoi actuellement.</h4>";
+			echo "<h4> Vous ne participez Ã  aucun tournoi actuellement.</h4>";
 		}
 		else{ 
 			?>
