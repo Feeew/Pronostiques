@@ -65,6 +65,12 @@ else
 			<button tabindex=5 type="submit" class="btn btn-default">S'inscrire</button>
 		  </form>
 
+		  <h5 style='color:red;'>
+		  		Mes connaissances en cyber-sécurité étant limitées, je ne garantis pas la complète sécurité de vos identifiants ou mot de passe. 
+		  		<br />
+		  		Je vous conseille donc fortement d'utiliser un mot de passe différent de ceux dont vous avez l'habitude.
+		  </h5>
+
 	<?php
 }
 

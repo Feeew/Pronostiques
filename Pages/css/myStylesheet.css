@@ -11,6 +11,16 @@
 h1{
 	font-family: 'Architects Daughter', cursive;
 }
+.contact_label{
+	font-family: 'Architects Daughter', cursive;
+}
+.contact_lib{
+	width:75px;
+	border-right:1px solid black;
+}
+.contact_value{
+	padding-left:12px;
+}
 #wrapper{
 	margin-left:50px;
 	margin-right:37px;
