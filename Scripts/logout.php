@@ -1,5 +1,5 @@
 <?php
-session_start();
+include '../Pages/session_start.php';
 
 $_SESSION["connected"] = false;
 $_SESSION["username"] = null;
