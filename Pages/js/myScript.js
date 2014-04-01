@@ -83,17 +83,17 @@ function send_to_sql(){
 	
 	var username = document.getElementById("username").innerHTML;
 	
-	var all_lines = document.getElementById("tournoi_pronostic").getElementsByTagName("tr");
-	
+	var all_lines = document.getElementsByClassName("en_cours");
+
 	var all_scores = [];
 
-	for(var i = 1; i<all_lines.length; i++)
+	for(var i = 0; i<all_lines.length; i++)
 	{
 		if(all_lines[i].getElementsByClassName(username)[0] != undefined){
-			all_scores[i-1] = all_lines[i].id + "_" + all_lines[i].getElementsByClassName(username)[0].innerHTML + "_" + all_lines[i].getElementsByClassName(username)[1].innerHTML;
+			all_scores[i] = all_lines[i].id + "_" + all_lines[i].getElementsByClassName(username)[0].innerHTML + "_" + all_lines[i].getElementsByClassName(username)[1].innerHTML;
 		}
 	}
-	
+
 	$.ajax({
 		type: "POST",
 		url: "../Scripts/modify_scores.php",
@@ -105,13 +105,36 @@ function send_to_sql(){
 		},
 		success: function(){
 			document.getElementById("bugs").innerHTML += "<span style='color:green; font-weight:bold;'>Vos résultats ont correctement été enregistrés !</span> <br />";
+			alert("Résultats correctement enregistrés !");
 		},
 		fail: function(){
 			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Vos résultats n'ont pas été correctement enregistrés, réessayez ou contactez l'administrateur. </span>  <br />";
+			alert("Erreur dans l'enregistrement des résultats des pronostics. Merci de réessayer ou de contacter l'administrateur.");
 		}
 	});
 }
 
-function inscription(){
-	alert("lol");
+function modifyResult(){
+	var match_id = document.getElementById("mod_id").value;
+	var score1 = document.getElementById("mod_score1").value;
+	var score2 = document.getElementById("mod_score2").value;
+	$.ajax({
+		type: "POST",
+		url: "../Scripts/modify_result.php",
+		context: document.body,
+		data:{
+			match_id:match_id,
+			score1:score1,
+			score2:score2
+		},
+		success: function(){
+			document.getElementById("bugs").innerHTML += "<span style='color:green; font-weight:bold;'>Le résultat du match a correctement été enregistré !</span> <br />";
+			alert("Résultats correctement enregistrés !");
+			$("#form_mod_result").submit();
+		},
+		fail: function(){
+			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Le résultat du match n'a pas été correctement enregistré, réessayez ou contactez l'administrateur. </span>  <br />";
+			alert("Erreur dans l'enregistrement du résultat du match. Merci de réessayer ou de contacter l'administrateur.");
+		}
+	});
 }
