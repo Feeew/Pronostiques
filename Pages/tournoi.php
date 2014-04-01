@@ -145,8 +145,8 @@ if($_SESSION["grade"]==2) {
 	<select id="mod_id">
 		<?php echo $options;?>
 	</select>
-	<input type="number" required style="width:35px; height:27px; text-align:center;" name="score1" id="mod_score1" placeholder="-" />
-	<input type="number" required style="width:35px; height:27px; text-align:center;" name="score2" id="mod_score2" placeholder="-" />
+	<input type="number" required style="width:46px; height:27px; text-align:center;" name="score1" id="mod_score1" placeholder="-" />
+	<input type="number" required style="width:46px; height:27px; text-align:center;" name="score2" id="mod_score2" placeholder="-" />
 	<input type="hidden" name="tournoi_id" value="<?php echo $tournoi_id; ?>"/>
 	<input type="hidden" name="tournoi_nom" value="<?php echo $tournoi_nom; ?>"/>
 	<input type="button" value="Go !" onclick="modifyResult();"/>
