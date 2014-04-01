@@ -43,7 +43,7 @@ include 'header.php';
 		<br/>
 		<?php 
 		if(count($tournois) == 0){ 
-			echo "<h4> Vous ne participez à aucun tournoi actuellement.</h4>";
+			echo "<h4> Vous ne participez &agrave; aucun tournoi actuellement.</h4>";
 		}
 		else{ 
 			?>

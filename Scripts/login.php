@@ -31,13 +31,14 @@ if (isset($_POST['password']) && isset($_POST['username']))
 		$exist = $result[0]['exist'];
 		
 		if($exist){
-			$sql = "SELECT ID FROM Users WHERE USERNAME = '".strtoupper($username)."'";
+			$sql = "SELECT ID, Grade FROM Users WHERE USERNAME = '".strtoupper($username)."'";
 			$stmt = $db->prepare($sql);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			$_SESSION['connected'] = true;
 			$_SESSION['username'] = $username;
 			$_SESSION['user_id'] = $result[0]["ID"];
+			$_SESSION['grade'] = $result[0]["Grade"];
 
 			/*ECRITURE DANS LA TABLE DE LOG*/
 			$sql = $db->prepare("INSERT INTO Logs (login, IP, Connect_date) VALUES (:username, :ip, :CDate)");

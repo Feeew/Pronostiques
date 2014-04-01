@@ -40,6 +40,22 @@ if(isset($_GET["err"])){
 }
 
 ?>
+<br />
+<h4>Derniers ajouts</h4>
+<h5>V1.4 - 1 Avril 2014</h5>
+<p>Ajout d'une partie Administration sur la page des pronostics d'un tournoi permettant &agrave; un administrateur de modifier le r&eacute;sultat d'un match.</p>
+<p>Ajout d'un message d'alerte lors de l'inscription à propos de la cyber-sécurité.</p>
+
+<br />
+<h5>V1.3 - 25 Mars 2014</h5>
+<p>Ajout du formulaire de suggestion dans l'onglet "Suggestion" afin de permettre aux utilisateurs de proposer des am&eacute;liorations, ajouts, corrections.</p>
+<p>Ajout de la page "Contact" listant les diff&eacute;rents moyens de me contacter.</p>
+<p>Ajout de messages d'erreurs sur la page d'accueil lors d'une erreur &agrave; l'authentification ou lorsque la session a expir&eacute;.</p>
+
+<h4>Prochains ajouts</h4>
+<p>Différencier les sports selon les tournois (Rugby, Foot...).</p>
+<p>Attribuer des points bonus en fonction du score (pronostic exact pour le Foot, X points d'écarts pour le rugby).</p>
+
 </div>
 </div>
 

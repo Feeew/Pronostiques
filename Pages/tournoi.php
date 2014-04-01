@@ -67,19 +67,25 @@ else{
 			</tr>
 		
 		<?php 
-		
+			if($_SESSION["grade"]==2) $options = "";
 			date_default_timezone_set('CET');
 			foreach($result_equipes as $row1){
 				$score_match1 = ($row1["score1"] != null) ? $row1["score1"] : "-";
 				$score_match2 = ($row1["score2"] != null) ? $row1["score2"] : "-";
 				if((date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"]))) && ($score_match1!="-" && $score_match2!="-"))
-				echo "<tr class='yellow_line' id=".$row1["ID"].">";
-				else echo "<tr id=".$row1["ID"].">";
+					echo "<tr class='yellow_line en_cours' id=".$row1["ID"].">";
+				else if(strtotime(date("d-m-Y")) < strtotime($row1["Date"]))
+						echo "<tr id=".$row1["ID"]." class='en_cours'>";
+					 else echo "<tr id=".$row1["ID"].">";
 				echo "
 							<td class='unirow'>".date("d-m-Y", strtotime($row1["Date"]))."</td>
 							<td class='unirow'>".$row1["Equipe1"]."</td>
 							<td class='unirow'>".$row1["Equipe2"]."</td>
 				";
+				if($_SESSION["grade"]==2 && (date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"])) || strtotime(date("d-m-Y")) > strtotime($row1["Date"]))) 
+					{
+						$options.="<option value='".$row1["ID"]."'>".$row1["Equipe1"]." / ".$row1["Equipe2"]."</option>";
+					}
 				foreach($result_joueurs as $row2){
 						$scores = $db->prepare("SELECT Score1, Score2 FROM Pronostic WHERE ID_Tournoi = ".$tournoi_id." AND ID_user = ".$row2["ID"]." AND ID_Match = ".$row1["ID"]." ORDER BY ID_User");
 						$scores->execute();
@@ -129,6 +135,29 @@ else{
 </div>
 
 <br /><br />
+<?php 
+if($_SESSION["grade"]==2) {
+?>
+<fieldset>
+	<legend>Partie Admin</legend>
+<form method="post" id="form_mod_result">
+	<label>Changer le résultat d'un match</label><br />
+	<select id="mod_id">
+		<?php echo $options;?>
+	</select>
+	<input type="number" required style="width:35px; height:27px; text-align:center;" name="score1" id="mod_score1" placeholder="-" />
+	<input type="number" required style="width:35px; height:27px; text-align:center;" name="score2" id="mod_score2" placeholder="-" />
+	<input type="hidden" name="tournoi_id" value="<?php echo $tournoi_id; ?>"/>
+	<input type="hidden" name="tournoi_nom" value="<?php echo $tournoi_nom; ?>"/>
+	<input type="button" value="Go !" onclick="modifyResult();"/>
+</form>
+</fieldset>
+<?php
+}
+?>
+
+
+
 <fieldset class="hidden">
 	<legend>Rapport d'activité</legend>
 	<div id="bugs"></div>
