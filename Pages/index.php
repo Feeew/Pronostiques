@@ -52,9 +52,10 @@ if(isset($_GET["err"])){
 <p>Ajout de la page "Contact" listant les diff&eacute;rents moyens de me contacter.</p>
 <p>Ajout de messages d'erreurs sur la page d'accueil lors d'une erreur &agrave; l'authentification ou lorsque la session a expir&eacute;.</p>
 
+<br /><br />
 <h4>Prochains ajouts</h4>
-<p>Différencier les sports selon les tournois (Rugby, Foot...).</p>
-<p>Attribuer des points bonus en fonction du score (pronostic exact pour le Foot, X points d'écarts pour le rugby).</p>
+<p>Diff&eacute;rencier les sports selon les tournois (Rugby, Foot...).</p>
+<p>Attribuer des points bonus en fonction du score (pronostic exact pour le Foot, X points d'&eacute;carts pour le rugby).</p>
 
 </div>
 </div>
