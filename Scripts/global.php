@@ -11,9 +11,7 @@ ini_set('error_log', dirname(__file__) . '/logs/log_error_php.txt');
 try{
     $dsn = 'mysql:dbname=Rugby2014;host=localhost';
 	$user = 'root';
-	// WINDOWS : $password = '';
-	// MAC / $password = 'root';
-	$password = 'root';
+	$password = '';
 	try {
 		$db = new PDO($dsn, $user, $password);
 	} catch (PDOException $e) {
