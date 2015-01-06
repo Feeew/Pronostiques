@@ -24,6 +24,9 @@ include '../Scripts/test_session.php';
 if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false){
 	header('Location: index.php');
 }
+else if(!isset($_POST['tournoi_id']) || !isset($_POST['tournoi_nom'])){
+	header('Location: mesTournois.php');
+}
 else{
 	$tournoi_id = $_POST["tournoi_id"];
 	$tournoi_nom = $_POST["tournoi_nom"];
