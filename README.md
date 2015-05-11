@@ -1,4 +1,4 @@
-Rugby2014
+Pronostiques
 =========
-Sources d'un projet permettant à un utilisateur de créer un compte, rejoindre un tournoi et proposer des pronostics.
+Sources d'un projet permettant à un utilisateur de créer un compte, créer ou rejoindre un tournoi, proposer des pronostics.
 Les résultats, points et classements sont automatiquement calculés le lendemain du match.
