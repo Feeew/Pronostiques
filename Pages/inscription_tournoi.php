@@ -3,35 +3,6 @@ include 'session_start.php';
 include '../Scripts/test_session.php';
 
 include '../Scripts/global.php';
-
-if (isset($_POST['tournoi_id']))
-{ 
-	$user_id = $_SESSION["user_id"];
-	$tournoi_id = $_POST["tournoi_id"];
-	
-	try{
-		$sql = $db->prepare("INSERT INTO Inscriptions (ID_Tournoi, ID_User) VALUES (:tournoi_id, :user_id)");
-		$result = $sql->execute(array(
-			'tournoi_id'	=> $tournoi_id,
-			'user_id'	=> $user_id
-		));
-		$sql = $db->prepare("SELECT ID FROM Matchs WHERE ID_Tournoi = ".$tournoi_id);
-		$sql->execute();
-		$result = $sql->fetchAll();
-		foreach($result as $row){
-			$sql = $db->prepare("INSERT INTO Pronostic (ID_User, ID_Tournoi, ID_Match, Score1, Score2) VALUES (:user_id, :tournoi_id, :match_id, 0, 0)");
-			$result = $sql->execute(array(
-				'user_id'	=> $user_id,
-				'tournoi_id'	=> $tournoi_id,
-				'match_id'	=> $row["ID"]
-			));
-		}
-		header('Location: index.php');
-	}
-	catch(Exception $e){
-		echo "Erreur dans l'inscription au tournoi : ".$e->getMessage();
-	}
-}
 ?>
 <html>
 <head>
@@ -95,6 +66,35 @@ if (!isset($_POST['tournoi_id']))
 		echo "</form>";
 	}
 	
+}else
+{ 
+	$user_id = $_SESSION["user_id"];
+	$tournoi_id = $_POST["tournoi_id"];
+	
+	try{
+		$sql = $db->prepare("INSERT INTO Inscriptions (ID_Tournoi, ID_User) VALUES (:tournoi_id, :user_id)");
+		$result = $sql->execute(array(
+			'tournoi_id'	=> $tournoi_id,
+			'user_id'	=> $user_id
+		));
+		$sql = $db->prepare("SELECT ID FROM Matchs WHERE ID_Tournoi = ".$tournoi_id);
+		$sql->execute();
+		$result = $sql->fetchAll();
+		foreach($result as $row){
+			$sql = $db->prepare("INSERT INTO pronostic (ID_User, ID_Tournoi, ID_Match, Score1, Score2) VALUES (:user_id, :tournoi_id, :match_id, 0, 0)");
+			$result = $sql->execute(array(
+				'user_id'	=> $user_id,
+				'tournoi_id'	=> $tournoi_id,
+				'match_id'	=> $row["ID"]
+			));
+		}
+		echo "<b>Inscription terminée. Bonne chance !</b>"; 
+		echo "<br />";
+		echo "<a href='mesTournois.php'>Retour à la liste de mes tournois</a>";
+	}
+	catch(Exception $e){
+		echo "Erreur dans l'inscription au tournoi : ".$e->getMessage();
+	}
 }
 
 

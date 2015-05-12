@@ -84,7 +84,7 @@ h1{
 .incorrect{
 	background-color:#b00;
 }
-.addUser{
+.formAjout{ /*User ou Tournoi*/
 	width:250px;
 }
 .unirow{
