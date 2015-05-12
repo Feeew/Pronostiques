@@ -27,7 +27,7 @@ $membresTournoi->execute(array(
 $result_membres = $membresTournoi->fetchAll();
 
 foreach($result_membres as $membre){
-	$sql = $db->prepare("INSERT INTO pronostic (ID_User, ID_Tournoi, ID_Match, Score1, Score2) VALUES (:user_id, :tournoi_id, :match_id, 0, 0)");
+	$sql = $db->prepare("INSERT INTO Pronostic (ID_User, ID_Tournoi, ID_Match, Score1, Score2) VALUES (:user_id, :tournoi_id, :match_id, 0, 0)");
 	$result = $sql->execute(array(
 		'user_id'	=> $membre['ID_User'],
 		'tournoi_id'	=> $tournoi_id,
