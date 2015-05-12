@@ -2,6 +2,10 @@
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/myStylesheet.css" rel="stylesheet">
+<link href="css/jquery-ui.min.css" rel="stylesheet">
+<link href="css/jquery-ui.structure.min.css" rel="stylesheet">
+<link href="css/jquery-ui.theme.min.css" rel="stylesheet">
+<link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet">
 	
 
 <nav class="navbar navbar-default" role="navigation">
@@ -26,7 +30,9 @@
 		  <ul class="dropdown-menu">
 			<li><a href="mesTournois.php">Mes tournois actuels</a></li>
 			<li class="divider"></li>
+			<?php if($_SESSION["grade"]==2){ ?><li><a href="creation_tournoi.php">Créer un tournoi</a></li> <?php } ?>
 			<li><a href="inscription_tournoi.php">S'inscrire à un tournoi</a></li>
+			<li class="divider"></li>
 			<li><a href="historiqueTournois.php">Historique des tournois</a></li>
 		  </ul>
 		</li>

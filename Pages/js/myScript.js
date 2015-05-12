@@ -138,3 +138,32 @@ function modifyResult(){
 		}
 	});
 }
+
+
+
+function addMatch(){
+	var tournoi_id = document.getElementById("TOURNOI_ID").value;
+	var equipe1 = document.getElementById("Equipe1").value;
+	var equipe2 = document.getElementById("Equipe2").value;
+	var dateMatch = document.getElementById("DateMatch").value;
+	$.ajax({
+		type: "POST",
+		url: "../Scripts/addMatch.php",
+		context: document.body,
+		data:{
+			tournoi_id:tournoi_id,
+			equipe1:equipe1,
+			equipe2:equipe2,
+			dateMatch:dateMatch
+		},
+		success: function(data){
+			if(confirm("Le match a correctement été ajouté. Rechargez la page ?")){
+				location.reload();
+			}
+		},
+		fail: function(){
+			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Le match n'a pas pu être créé, réessayez ou contactez l'administrateur. </span>  <br />";
+			alert("Erreur dans la création du match. Merci de réessayer ou de contacter l'administrateur.");
+		}
+	});
+}

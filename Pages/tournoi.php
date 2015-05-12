@@ -143,17 +143,39 @@ if($_SESSION["grade"]==2) {
 ?>
 <fieldset>
 	<legend>Partie Admin</legend>
-<form method="post" id="form_mod_result">
-	<label>Changer le résultat d'un match</label><br />
-	<select id="mod_id">
-		<?php echo $options;?>
-	</select>
-	<input type="number" required style="width:46px; height:27px; text-align:center;" name="score1" id="mod_score1" placeholder="-" />
-	<input type="number" required style="width:46px; height:27px; text-align:center;" name="score2" id="mod_score2" placeholder="-" />
-	<input type="hidden" name="tournoi_id" value="<?php echo $tournoi_id; ?>"/>
-	<input type="hidden" name="tournoi_nom" value="<?php echo $tournoi_nom; ?>"/>
-	<input type="button" value="Go !" onclick="modifyResult();"/>
-</form>
+	<form method="post" id="form_mod_result">
+		<h4>Changer le résultat d'un match</h4><br />
+		<select id="mod_id">
+			<?php echo $options;?>
+		</select>
+		<input type="number" required style="width:46px; height:27px; text-align:center;" name="score1" id="mod_score1" placeholder="-" />
+		<input type="number" required style="width:46px; height:27px; text-align:center;" name="score2" id="mod_score2" placeholder="-" />
+		<input type="hidden" name="tournoi_id" value="<?php echo $tournoi_id; ?>"/>
+		<input type="hidden" name="tournoi_nom" value="<?php echo $tournoi_nom; ?>"/>
+		<input type="button" value="Go !" onclick="modifyResult();"/>
+	</form>
+	<br /><br />
+	<form method="post" id="form_add_match">
+		<h4>Ajouter un match</h4><br />
+		<table>
+			<tr>
+				<td><label for="Equipe1" style="margin-right:14px;" >Nom equipe 1</label></td>
+				<td><input type="text" required name="Equipe1" id="Equipe1" placeholder="Equipe 1" /></td>
+			</tr>
+			<tr>
+				<td><label for="Equipe2" style="margin-right:14px;" >Nom equipe 2</label></td>
+				<td><input type="text" required name="Equipe2" id="Equipe2" placeholder="Equipe 2" /></td>
+			</tr>
+			<tr>
+				<td><label for="DateMatch" style="margin-right:14px;" >Date du match</label></td>
+				<td><input type="text" name="DateMatch" id="DateMatch" placeholder="Date du match"/></td>
+			</tr>
+		</table>
+		<br />
+		
+		<input type="hidden" name="tournoi_id" value="<?php echo $tournoi_id; ?>"/>
+		<input type="button" value="Go !" onclick="addMatch();"/>
+	</form>
 </fieldset>
 <?php
 }
@@ -175,6 +197,10 @@ if($_SESSION["grade"]==2) {
 <?php
 	include './footer.php';
 ?>
+
+<script type="text/javascript">
+	$("#DateMatch").datetimepicker({ dateFormat: 'yy-mm-dd' });
+</script>
 	
 </body>
 </html>

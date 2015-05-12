@@ -53,17 +53,17 @@ else
 
     	<form method="post" action="addUser.php" class="">
 			<div class="form-group">
-				<div class="input-group addUser">
+				<div class="input-group formAjout">
 				  <span class="input-group-addon" onclick="document.getElementById('username').focus();"><div class="glyphicon glyphicon-user"></div></span>
 				  <input type="text" id="username" tabindex=3 class="form-control" name="username" placeholder="Nom de compte" required>
 				</div>
-				<div class="input-group addUser">
+				<div class="input-group formAjout">
 				  <span onclick="document.getElementById('password').focus();" class="input-group-addon"><div class="glyphicon glyphicon-lock"></div></span>
 				  <input tabindex=4 id="password" type="password" name="password" class="form-control" placeholder="Mot de passe" required>
 				</div>
 			</div>
 			<button tabindex=5 type="submit" class="btn btn-default">S'inscrire</button>
-		  </form>
+		</form>
 
 		  <h5 style='color:red;'>
 		  		Mes connaissances en cyber-sécurité étant limitées, je ne garantis pas la complète sécurité de vos identifiants ou mot de passe. 
