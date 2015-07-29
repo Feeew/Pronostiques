@@ -36,10 +36,10 @@ function mod_score(className){
 
 //On clique sur "Valider" --> On transforme les inputs en case
 function valid_score(className){
-	var tds=document.getElementsByClassName(className);
+	var tds=$("."+className);
 	for(var i = 0; i<tds.length; i++){
 		if(input_modified.indexOf(i) != -1){
-			var valeur = toInt(tds[i].getElementsByTagName("input")[0].value);
+			var valeur = toInt($(tds[i]).find("input")[0].value);
 			var msg_match;
 			if(i%2 != 0) msg_match = "Equipe 2";
 			else msg_match = "Equipe 1";
@@ -53,7 +53,7 @@ function valid_score(className){
 			}
 		}
 		else{
-			var valeur = toInt(tds[i].getElementsByTagName("input")[0].value);
+			var valeur = toInt($(tds[i]).find("input")[0].value);
 			tds[i].innerHTML = valeur;
 		}
 	}
@@ -86,11 +86,16 @@ function send_to_sql(){
 	var all_lines = document.getElementsByClassName("en_cours");
 
 	var all_scores = [];
-
+	
 	for(var i = 0; i<all_lines.length; i++)
 	{
-		if(all_lines[i].getElementsByClassName(username)[0] != undefined){
-			all_scores[i] = all_lines[i].id + "_" + all_lines[i].getElementsByClassName(username)[0].innerHTML + "_" + all_lines[i].getElementsByClassName(username)[1].innerHTML;
+		var test = all_lines[i];
+		test = $(all_lines[i]);
+		test = $(all_lines[i]).find("."+username);
+		test = $(all_lines[i]).find("."+username)[0];
+		
+		if($(all_lines[i]).find("."+username.toUpperCase())[0] != undefined){
+			all_scores[i] = all_lines[i].id + "_" + $(all_lines[i]).find("."+username.toUpperCase())[0].innerHTML + "_" + $(all_lines[i]).find("."+username.toUpperCase())[1].innerHTML;
 		}
 	}
 
