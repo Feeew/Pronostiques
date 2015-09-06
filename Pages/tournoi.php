@@ -107,7 +107,7 @@ else{
 							if((($score_match1-$score_match2)>0 && ($score1-$score2)>0) || (($score_match2-$score_match1)>0 && ($score2-$score1)>0)) 
 							{
 								$points = 3;
-								$ecart_point = abs($score_match2-$score_match1) - abs($score2 - $score1);
+								$ecart_point = abs(abs($score_match2-$score_match1) - abs($score2 - $score1));
 								if($ecart_point <= 5  && $ecart_point >= 0)
 									$points += 2;
 								$str_points="<td class='correct case_result'>".$points."</td>";
