@@ -52,6 +52,11 @@ else{
 		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Comment modifier son score : </h4>
 		<p>Cliquez sur votre pseudo dans le tableau (Noir gras souligné). Les scores des matchs non-joués deviennent alors modifiables. Cliquez à nouveau sur votre pseudo pour valider les scores.</p>
 		<br/>
+		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Quelques règles : </h4>
+		<p>Un bon pronostique donne 3 points. Un écart de 5 points ou moins entre l'écart de votre score et l'écart du résultat final donne 2 points bonus.</p>
+		<p></p>
+		<p>Par exemple, si vous pronostiquez 15-11, l'écart est de 4. Si le résultat final est 17-15, l'écart est de 2. La différence des écarts est de 2 (4-2), donc vous marquez 2 points bonus, pour un total de 5 points.</p>
+		<br/>
 		<div class="Tableau">
 		<table id="tournoi_pronostic" class='tournoi_pronostic'>
 			<tr>
@@ -102,6 +107,9 @@ else{
 							if((($score_match1-$score_match2)>0 && ($score1-$score2)>0) || (($score_match2-$score_match1)>0 && ($score2-$score1)>0)) 
 							{
 								$points = 3;
+								$ecart_point = abs($score_match2-$score_match1) - abs($score2 - $score1);
+								if($ecart_point <= 5  && $ecart_point >= 0)
+									$points += 2;
 								$str_points="<td class='correct case_result'>".$points."</td>";
 							}
 							else{
@@ -112,7 +120,7 @@ else{
 						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) echo "<td class='result case_result ".$row2["Username"]."'>".$score1."</td><td class='result case_result ".$row2["Username"]."'>".$score2."</td>".$str_points;
 						else echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
 
-						if($points==3) $tab_scores[$row2["Username"]] = $tab_scores[$row2["Username"]] + $points;
+						if($points > 0) $tab_scores[$row2["Username"]] = $tab_scores[$row2["Username"]] + $points;
 				}
 				echo "<td class='result case_result'>".$score_match1."</td><td class='result case_result'>".$score_match2."</td></tr>";
 			}
