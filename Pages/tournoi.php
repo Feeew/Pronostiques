@@ -80,7 +80,7 @@ else{
 			foreach($result_equipes as $row1){
 				$score_match1 = ($row1["score1"] != null) ? $row1["score1"] : "-";
 				$score_match2 = ($row1["score2"] != null) ? $row1["score2"] : "-";
-				if((date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"]))) && ($score_match1!="-" && $score_match2!="-"))
+				if((date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"]))) && ($score_match1=="-" && $score_match2=="-"))
 					echo "<tr class='yellow_line en_cours' id=".$row1["ID"].">";
 				else if(strtotime(date("d-m-Y")) < strtotime($row1["Date"]))
 						echo "<tr id=".$row1["ID"]." class='en_cours'>";
