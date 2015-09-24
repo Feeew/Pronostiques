@@ -29,7 +29,7 @@ function add_to_tab(value){
 function mod_score(className){
 	var tds=document.getElementsByClassName(className);
 	for(var i = 0; i<tds.length; i++){
-		tds[i].innerHTML = "<input type='int' value='"+tds[i].innerHTML+"' onkeypress='add_to_tab("+i+")' maxlength=2/>";
+		tds[i].innerHTML = "<input type='int' value='"+tds[i].innerHTML+"' onkeypress='add_to_tab("+i+")' maxlength=3/>";
 	}
 	document.getElementById(className).onclick=function(){valid_score(className)};
 }
