@@ -54,8 +54,23 @@ include 'header.php';
 		if($ajout == 1){
 			echo "<h4>Votre suggestion a &eacute;t&eacute; transmise !</h4>";
 		}
+		if($_SESSION['grade'] == 2){
 	?>
-
+	<h3>Liste des suggestions</h3>
+	<table id="suggestions">
+		<tr><th>Utilisateur</th><th>Date</th><th>Suggestion</th></tr>
+		<?php
+			$sql = $db->prepare("SELECT * FROM suggestions ORDER BY CDate DESC");
+			$sql->execute();
+			$suggestions = $sql->fetchAll();
+			foreach($suggestions as $suggestion){
+				echo "<tr><td>".$suggestion['Username']."</td><td>".$suggestion['CDate']."</td><td class='message'>".$suggestion['Message']."</td></tr>";
+			}
+		?>
+	</table>
+	<?php
+		}
+	?>
 </div>
 </div>
 
