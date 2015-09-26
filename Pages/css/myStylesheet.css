@@ -208,3 +208,22 @@ h1{
 .btn-primary{
 	border:1px solid #02325f;
 }
+
+/*
+	SUGGESTIONS
+*/
+table#suggestions{
+	width:75%;
+}
+table#suggestions td, table#suggestions th{
+	border:1px solid black;
+	min-width:250px;
+	text-align:center;
+}
+table#suggestions th{
+	background:gray;
+}
+table#suggestions td.message{
+	text-align:left;
+	padding:0 10px;
+}
