@@ -60,7 +60,7 @@ include 'header.php';
 	<table id="suggestions">
 		<tr><th>Utilisateur</th><th>Date</th><th>Suggestion</th></tr>
 		<?php
-			$sql = $db->prepare("SELECT * FROM suggestions ORDER BY CDate DESC");
+			$sql = $db->prepare("SELECT * FROM Suggestions ORDER BY CDate DESC");
 			$sql->execute();
 			$suggestions = $sql->fetchAll();
 			foreach($suggestions as $suggestion){
