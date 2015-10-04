@@ -32,8 +32,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body) {
 	}
 }
 
-$no_prono = $db->prepare("
-						SELECT 
+$no_prono = $db->prepare("SELECT 
 							Users.Username, Users.Email, 
 							Matchs.Equipe1, Matchs.Equipe2, Matchs.Date, Matchs.score1 as m1, Matchs.score2 as m2,
 							Pronostic.Score1, Pronostic.Score2 
@@ -45,23 +44,26 @@ $no_prono = $db->prepare("
 						INNER JOIN Pronostic ON Pronostic.ID_Match = Matchs.ID AND Pronostic.ID_Tournoi = Tournoi.ID 
 						WHERE Pronostic.Score1 = 0 
 						AND Pronostic.Score2 = 0
-						GROUP BY Matchs.ID"
+						AND Users.Email != ''
+						GROUP BY Matchs.ID, Users.ID"
 						);
 $no_prono->execute();
 $result_no_prono = $no_prono->fetchAll();
 
 foreach($result_no_prono as $result){
 	$aujourdhui = date("Y-m-d", mktime(0, 0, 0, date('m'), date('d'), date('Y')));
-	$apresdemain = date("Y-m-d", mktime(0, 0, 0, date('m'), date('d'), date('Y')) + 24*60*60*2);
+	$apresdemain = date("Y-m-d", mktime(0, 0, 0, date('m'), date('d'), date('Y')) + 24*60*60*4);
 	if($result["Date"] > $aujourdhui && $result['Date'] < $apresdemain){
 		$emails[$result["Email"]][] = $result["Equipe1"] . " - " . $result['Equipe2'] . " : " . $result['Date'];
 	}
 }
 	
-foreach($emails as $email=>$matchs){
-	$message = "Vous devez mettre vos pronostiques avant les matchs suivants : <br /><br />";
-	foreach($matchs as $match){
-		$message .= $match . "<br />";
+if(count($emails) > 0){
+	foreach($emails as $email=>$matchs){
+		$message = "Vous devez mettre vos pronostiques avant les matchs suivants : <br /><br />";
+		foreach($matchs as $match){
+			$message .= $match . "<br />";
+		}
+		smtpmailer($email, 'seillier.benjamin@gmail.com', 'Benjamin SEILLIER', 'Site de pronostique', $message);
 	}
-	smtpmailer($email, 'seillier.benjamin@gmail.com', 'Benjamin SEILLIER', 'Site de pronostique', $message);
 }
