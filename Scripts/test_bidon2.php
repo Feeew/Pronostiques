@@ -41,7 +41,7 @@ $no_prono = $db->prepare("SELECT
 						INNER JOIN 	Inscriptions ON Users.ID = Inscriptions.ID_User 
 						INNER JOIN Tournoi ON Inscriptions.ID_Tournoi = Tournoi.ID 
 						INNER JOIN Matchs ON Matchs.ID_Tournoi = Tournoi.ID 
-						INNER JOIN Pronostic ON Pronostic.ID_Match = Matchs.ID AND Pronostic.ID_Tournoi = Tournoi.ID 
+						INNER JOIN Pronostic ON Pronostic.ID_Match = Matchs.ID AND Pronostic.ID_Tournoi = Tournoi.ID AND Pronostic.ID_User = Users.ID
 						WHERE Pronostic.Score1 = 0 
 						AND Pronostic.Score2 = 0
 						AND Users.Email != ''
@@ -58,6 +58,8 @@ foreach($result_no_prono as $result){
 		$emails[$result["Email"]][] = $result["Equipe1"] . " - " . $result['Equipe2'] . " : " . $result['Date'];
 	}
 }
+	
+	var_dump($emails);
 	
 if(count($emails) > 0){
 	foreach($emails as $email=>$matchs){

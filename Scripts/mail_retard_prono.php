@@ -67,3 +67,4 @@ if(count($emails) > 0){
 		smtpmailer($email, 'seillier.benjamin@gmail.com', 'Benjamin SEILLIER', 'Site de pronostique', $message);
 	}
 }
+?>
