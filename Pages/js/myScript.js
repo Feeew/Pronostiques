@@ -172,3 +172,6 @@ function addMatch(){
 		}
 	});
 }
+
+/*CSS POUR LA MESSAGERIE*/
+$(".messagerie").css("height", $("#div_final_results")[0].offsetHeight);
