@@ -44,9 +44,6 @@ else{
 	$joueurs->execute();
 	$result_joueurs = $joueurs->fetchAll();
 	
-	//Ancienne fonction avec l'icone "crayon" pour modifier
-	//if(strtoupper($row["Username"]) == strtoupper($_SESSION['username']) || 1==1) echo "<td colspan='3' id=".strtoupper($row['Username'])."><span class='th_edit'>".$row["Username"]."</span><span onclick='mod_score(\"".strtoupper($row['Username'])."\")' style='float:right;' class='glyphicon glyphicon-pencil'></span></td>";
-		
 	?>
 		<br />
 		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Comment modifier son score : </h4>
@@ -130,20 +127,42 @@ else{
 </div>
 
 <br /><br />
+<div id="result_messagerie">
+	<div class="final_results tableau" id="div_final_results" style="margin:0">
+		<table id="final_results" class="tournoi_pronostic"><tr><th class='th_joueur' style="border-right:1px solid black">Joueur</th><th>Score</th></tr>
+			<?php
 
-<div class="final_results tableau" style="margin:0">
-<table id="final_results" class="tournoi_pronostic"><tr><th class='th_joueur' style="border-right:1px solid black">Joueur</th><th>Score</th></tr>
-<?php
-
-	arsort($tab_scores);
-	
-	foreach($tab_scores as $key=>$value){
-			echo "<tr><td>".$key."</td><td>".$value."</td></tr>";
-	}
-	
-?>
-</table>
+				arsort($tab_scores);
+				
+				foreach($tab_scores as $key=>$value){
+						echo "<tr><td>".$key."</td><td>".$value."</td></tr>";
+				}
+				
+			?>
+		</table>
+	</div>
+	<div class="messagerie">
+		<table id="messagerie_table" class="tournoi_pronostic">
+			<tr>
+				<th colspan="99">Messagerie</th>
+			</tr>
+			<?php
+				$messagerie = $db->prepare("SELECT Username, date, message from Messagerie
+											INNER JOIN Users ON Users.id = Messagerie.idUserWhere
+											WHERE Messagerie.idTournoi = ".$tournoi_id." ORDER BY Messagerie.Date ASC");
+				$messagerie->execute();
+				$messages = $messagerie->fetchAll();
+			?>
+			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
+			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
+			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
+			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
+			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
+		</table>
+	</div>
+<div class="clear"></div>
 </div>
+
 
 <br /><br />
 <?php 
