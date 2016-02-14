@@ -216,11 +216,22 @@ h1{
 	box-shadow: 6px 6px 6px rgb(126, 126, 126);
 }
 .nom_message{
-	width:150px;
+	width:250px;
 }
 #messagerie_table th{
 	text-align:left;
 	padding-left:15px;
+}
+
+#messagerie_table tbody{
+	display:block;
+	max-height:150px;
+	overflow-y:scroll;
+}
+
+#messagerie_table tbody tr{
+	display:table;
+	width:100%;
 }
 
 /*

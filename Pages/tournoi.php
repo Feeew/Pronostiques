@@ -143,21 +143,23 @@ else{
 	</div>
 	<div class="messagerie">
 		<table id="messagerie_table" class="tournoi_pronostic">
-			<tr>
-				<th colspan="99">Messagerie</th>
-			</tr>
+			<thead>
+				<tr>
+					<th colspan="99">Messagerie</th>
+				</tr>
+			</thead>
 			<?php
-				$messagerie = $db->prepare("SELECT Username, date, message from Messagerie
-											INNER JOIN Users ON Users.id = Messagerie.idUserWhere
-											WHERE Messagerie.idTournoi = ".$tournoi_id." ORDER BY Messagerie.Date ASC");
+				$messagerie = $db->prepare("SELECT u.Username, m.date, m.message from Messagerie m
+											INNER JOIN Users u ON u.ID = m.idUser
+											WHERE m.idTournoi = " .$tournoi_id. " ORDER BY m.date ASC");
 				$messagerie->execute();
-				$messages = $messagerie->fetchAll();
+				$au_moins_un_message = false;
+				while($message = $messagerie->fetch()){
+					echo "<tr class='tr_input_message'><td class='nom_message'>".$message["date"]." | ".$message["Username"]."</td><td>".$message["message"]."</td></tr>";
+					$au_moins_un_message = true;
+				}
 			?>
-			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
-			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
-			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
-			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
-			<tr><td class='nom_message'>Date : Amadeus</td><td>Blblblblbllblblblblb</td></tr>
+			<tfoot><tr class='tr_input_message'><td colspan='99'><input type="text" id="message" name="message" placeholder="Votre message" style="width:93%; text-align:left; padding-left:3px;"/><input type="button" id="buttonAddMessage" value="Envoyer" style="width:7%; float:right;" onclick="addMessage();" /></td></tr></tfoot>
 		</table>
 	</div>
 <div class="clear"></div>
@@ -227,6 +229,12 @@ if($_SESSION["grade"]==2) {
 
 <script type="text/javascript">
 	$("#DateMatch").datetimepicker({ dateFormat: 'yy-mm-dd' });
+	
+	$("#message").keyup(function(event){
+		if(event.keyCode == 13){
+			$("#buttonAddMessage").click();
+		}
+	});
 </script>
 	
 </body>
