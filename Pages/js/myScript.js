@@ -173,5 +173,28 @@ function addMatch(){
 	});
 }
 
+function addMessage(){
+	var tournoi_id = document.getElementById("TOURNOI_ID").value;
+	var user_id = document.getElementById("USER_ID").value;
+	var message = document.getElementById("message").value;
+	
+	$.ajax({
+		type: "POST",
+		url: "../Scripts/addMessage.php",
+		context: document.body,
+		data:{
+			tournoi_id:tournoi_id,
+			user_id:user_id,
+			message:message
+		},
+		success: function(data){
+			data = JSON.parse(data);
+			$("<tr class='tr_input_message'><td class='nom_message'>" + data["date"] + " | " + data["Username"] + "</td><td>" + message + "</td></tr>").insertBefore($(".tr_input_message").first());
+			$($(".tr_input_message")[1]).attr("class", "");
+			$("#message").val("");
+		}
+	});
+}
+
 /*CSS POUR LA MESSAGERIE*/
-$(".messagerie").css("height", $("#div_final_results")[0].offsetHeight);
+//$(".messagerie")/.css("height", $("#div_final_results")[0].offsetHeight);

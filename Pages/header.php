@@ -30,7 +30,7 @@
 		  <ul class="dropdown-menu">
 			<li><a href="mesTournois.php">Mes tournois actuels</a></li>
 			<li class="divider"></li>
-			<?php if($_SESSION["grade"]==2){ ?><li><a href="creation_tournoi.php">Créer un tournoi</a></li> <?php } ?>
+			<?php if(isset($_SESSION["grade"]) && $_SESSION["grade"]==2){ ?><li><a href="creation_tournoi.php">Créer un tournoi</a></li> <?php } ?>
 			<li><a href="inscription_tournoi.php">S'inscrire à un tournoi</a></li>
 			<li class="divider"></li>
 			<li><a href="historiqueTournois.php">Historique des tournois</a></li>
