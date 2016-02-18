@@ -25,8 +25,6 @@ $requete->execute();
 			
 $last_message = $requete->fetch(); 
 
-echo $message;
-
 echo json_encode($last_message);
 	
 ?>
