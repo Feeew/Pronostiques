@@ -24,6 +24,7 @@ $requete = $db->prepare("SELECT u.Username as Username, m.date as date, m.messag
 $requete->execute();
 			
 $last_message = $requete->fetch(); 
+$last_message["date"] = date("Y-m-d h:i:s", $last_message["date"]);
 
 echo json_encode($last_message);
 	
