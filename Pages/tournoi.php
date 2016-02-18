@@ -156,7 +156,7 @@ else{
 				$au_moins_un_message = false;
 				while($message = $messagerie->fetch()){
 					echo "<tr class='tr_input_message'>";
-						echo "<td class='nom_message'>".date("Y-m-d h:i:s", $message["date"])."</td>";
+						echo "<td class='nom_message'>".date("Y-m-d H:i:s", $message["date"])."</td>";
 						echo "<td class='nom_message'>".$message["Username"]."</td>";
 						echo "<td class='message'>".$message["message"]."</td>";
 					echo "</tr>";
