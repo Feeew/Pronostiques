@@ -151,17 +151,30 @@ else{
 			<?php
 				$messagerie = $db->prepare("SELECT u.Username, m.date, m.message from Messagerie m
 											INNER JOIN Users u ON u.ID = m.idUser
-											WHERE m.idTournoi = " .$tournoi_id. " ORDER BY m.date ASC");
+											WHERE m.idTournoi = " .$tournoi_id. " ORDER BY m.date DESC");
 				$messagerie->execute();
 				$au_moins_un_message = false;
 				while($message = $messagerie->fetch()){
-					echo "<tr class='tr_input_message'><td class='nom_message'>".$message["date"]." | ".$message["Username"]."</td><td>".$message["message"]."</td></tr>";
+					echo "<tr class='tr_input_message'>";
+						echo "<td class='nom_message'>".date("Y-m-d h:i:s", $message["date"])."</td>";
+						echo "<td class='nom_message'>".$message["Username"]."</td>";
+						echo "<td class='message'>".$message["message"]."</td>";
+					echo "</tr>";
 					$au_moins_un_message = true;
 				}
 			?>
-			<tfoot><tr class='tr_input_message'><td colspan='99'><input type="text" id="message" name="message" placeholder="Votre message" style="width:93%; text-align:left; padding-left:3px;"/><input type="button" id="buttonAddMessage" value="Envoyer" style="width:7%; float:right;" onclick="addMessage();" /></td></tr></tfoot>
+			<tfoot>
+				<tr class='tr_input_message'>
+					<td colspan='99'>
+						<input type="text" id="message" name="message" placeholder="Votre message" style="width:93%; text-align:left; padding-left:3px;"/>
+						<input type="button" id="buttonAddMessage" value="Envoyer" style="width:7%; float:right;" onclick="addMessage();" />
+					</td>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
+	
+	
 <div class="clear"></div>
 </div>
 

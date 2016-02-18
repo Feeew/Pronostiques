@@ -1,4 +1,4 @@
-ï»¿function submit_inscription_tournoi(tournoi_id){
+function submit_inscription_tournoi(tournoi_id){
 	document.getElementById("tournoi_id").value = tournoi_id;
 	document.forms["all_tournois_form"].submit();
 }
@@ -17,7 +17,7 @@ function go_to_tournoi(tournoi_id, tournoi_nom){
 =============================
 */
 
-//Tableau des valeurs modifiÃ©es
+//Tableau des valeurs modifiées
 var input_modified = [];
 
 //Ajout de l'index de l'input au tableau
@@ -44,11 +44,11 @@ function valid_score(className){
 			if(i%2 != 0) msg_match = "Equipe 2";
 			else msg_match = "Equipe 1";
 			if(valeur == ""){
-				document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Valeur incorrecte pour le match nÂ°"+(Math.ceil((i+1)/2))+" - "+msg_match+" de l'utilisateur "+className+", 0 par dÃ©faut. <br /></span>";
+				document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Valeur incorrecte pour le match n°"+(Math.ceil((i+1)/2))+" - "+msg_match+" de l'utilisateur "+className+", 0 par défaut. <br /></span>";
 				tds[i].innerHTML = 0;
 			}
 			else{
-				document.getElementById("bugs").innerHTML += "<span style='color:green; font-weight:bold;'>Valeur '"+valeur+"' enregistrÃ©e pour le match nÂ°"+(Math.ceil((i+1)/2))+" - "+msg_match+" de l'utilisateur "+className+".<br /></span>";
+				document.getElementById("bugs").innerHTML += "<span style='color:green; font-weight:bold;'>Valeur '"+valeur+"' enregistrée pour le match n°"+(Math.ceil((i+1)/2))+" - "+msg_match+" de l'utilisateur "+className+".<br /></span>";
 				tds[i].innerHTML = valeur;
 			}
 		}
@@ -76,7 +76,7 @@ function writeInText(chaine){
 
 }
 
-//Envoie des donnÃ©es sur une page PHP
+//Envoie des données sur une page PHP
 function send_to_sql(){
 	var tournoi_id = document.getElementById("TOURNOI_ID").value;
 	var user_id = document.getElementById("USER_ID").value;
@@ -109,12 +109,12 @@ function send_to_sql(){
 			scores:all_scores
 		},
 		success: function(){
-			document.getElementById("bugs").innerHTML += "<span style='color:green; font-weight:bold;'>Vos rÃ©sultats ont correctement Ã©tÃ© enregistrÃ©s !</span> <br />";
-			alert("RÃ©sultats correctement enregistrÃ©s !");
+			document.getElementById("bugs").innerHTML += "<span style='color:green; font-weight:bold;'>Vos résultats ont correctement été enregistrés !</span> <br />";
+			alert("Résultats correctement enregistrés !");
 		},
 		fail: function(){
-			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Vos rÃ©sultats n'ont pas Ã©tÃ© correctement enregistrÃ©s, rÃ©essayez ou contactez l'administrateur. </span>  <br />";
-			alert("Erreur dans l'enregistrement des rÃ©sultats des pronostics. Merci de rÃ©essayer ou de contacter l'administrateur.");
+			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Vos résultats n'ont pas été correctement enregistrés, réessayez ou contactez l'administrateur. </span>  <br />";
+			alert("Erreur dans l'enregistrement des résultats des pronostics. Merci de réessayer ou de contacter l'administrateur.");
 		}
 	});
 }
@@ -133,13 +133,13 @@ function modifyResult(){
 			score2:score2
 		},
 		success: function(){
-			document.getElementById("bugs").innerHTML += "<span style='color:green; font-weight:bold;'>Le rÃ©sultat du match a correctement Ã©tÃ© enregistrÃ© !</span> <br />";
-			alert("RÃ©sultats correctement enregistrÃ©s !");
+			document.getElementById("bugs").innerHTML += "<span style='color:green; font-weight:bold;'>Le résultat du match a correctement été enregistré !</span> <br />";
+			alert("Résultats correctement enregistrés !");
 			$("#form_mod_result").submit();
 		},
 		fail: function(){
-			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Le rÃ©sultat du match n'a pas Ã©tÃ© correctement enregistrÃ©, rÃ©essayez ou contactez l'administrateur. </span>  <br />";
-			alert("Erreur dans l'enregistrement du rÃ©sultat du match. Merci de rÃ©essayer ou de contacter l'administrateur.");
+			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Le résultat du match n'a pas été correctement enregistré, réessayez ou contactez l'administrateur. </span>  <br />";
+			alert("Erreur dans l'enregistrement du résultat du match. Merci de réessayer ou de contacter l'administrateur.");
 		}
 	});
 }
@@ -162,13 +162,13 @@ function addMatch(){
 			dateMatch:dateMatch
 		},
 		success: function(data){
-			if(confirm("Le match a correctement Ã©tÃ© ajoutÃ©. Rechargez la page ?")){
+			if(confirm("Le match a correctement été ajouté. Rechargez la page ?")){
 				location.reload();
 			}
 		},
 		fail: function(){
-			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Le match n'a pas pu Ãªtre crÃ©Ã©, rÃ©essayez ou contactez l'administrateur. </span>  <br />";
-			alert("Erreur dans la crÃ©ation du match. Merci de rÃ©essayer ou de contacter l'administrateur.");
+			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Le match n'a pas pu être créé, réessayez ou contactez l'administrateur. </span>  <br />";
+			alert("Erreur dans la création du match. Merci de réessayer ou de contacter l'administrateur.");
 		}
 	});
 }
@@ -189,7 +189,7 @@ function addMessage(){
 		},
 		success: function(data){
 			data = JSON.parse(data);
-			$("<tr class='tr_input_message'><td class='nom_message'>" + data["date"] + " | " + data["Username"] + "</td><td>" + message + "</td></tr>").insertBefore($(".tr_input_message").first());
+			$("<tr class='tr_input_message'><td class='nom_message'>" + data["date"] + "</td><td class='nom_message'>" + data["Username"] + "</td><td>" + message + "</td></tr>").insertBefore($(".tr_input_message").first());
 			$($(".tr_input_message")[1]).attr("class", "");
 			$("#message").val("");
 		}

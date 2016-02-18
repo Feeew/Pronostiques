@@ -1,7 +1,7 @@
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/myStylesheet.css" rel="stylesheet">
+<link href="css/myStylesheet.css?<?php echo time();?>" rel="stylesheet">
 <link href="css/jquery-ui.min.css" rel="stylesheet">
 <link href="css/jquery-ui.structure.min.css" rel="stylesheet">
 <link href="css/jquery-ui.theme.min.css" rel="stylesheet">
