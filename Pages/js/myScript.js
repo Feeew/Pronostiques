@@ -189,7 +189,7 @@ function addMessage(){
 		},
 		success: function(data){
 			data = JSON.parse(data);
-			$("<tr class='tr_input_message'><td class='nom_message'>" + data["date"] + "</td><td class='nom_message'>" + data["Username"] + "</td><td>" + message + "</td></tr>").insertBefore($(".tr_input_message").first());
+			$("<tr class='tr_input_message'><td class='nom_message'>" + data["date"] + "</td><td class='nom_message'>" + data["Username"] + "</td><td class='message'>" + message + "</td></tr>").insertBefore($(".tr_input_message").first());
 			$($(".tr_input_message")[1]).attr("class", "");
 			$("#message").val("");
 		}
