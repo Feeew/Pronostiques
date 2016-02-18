@@ -1,4 +1,4 @@
-﻿body{
+body{
 	/*background:url(../img/test.jpg);*/
 	background:#f2f2f2;
 }
@@ -208,12 +208,17 @@ h1{
 .messagerie{
 	margin:0;
 	float:left;
-	width:70%;
+	width:86%;
 	border-top-left-radius:25px;
 	border-top-right-radius:25px;
 	border:1px solid black;
 	margin-left:40px;
 	box-shadow: 6px 6px 6px rgb(126, 126, 126);
+}
+#messagerie_table .message{
+	width:75%;
+	text-align:left;
+	padding-left:15px;
 }
 .nom_message{
 	width:250px;
@@ -230,8 +235,11 @@ h1{
 }
 
 #messagerie_table tbody tr{
-	display:table;
 	width:100%;
+}
+
+#messagerie_table thead{
+	
 }
 
 /*
