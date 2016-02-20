@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 include 'session_start.php';
 ?>
 <html>
@@ -66,9 +66,9 @@ else
 		</form>
 
 		  <h5 style='color:red;'>
-		  		Mes connaissances en cyber-sécurité étant limitées, je ne garantis pas la complète sécurité de vos identifiants ou mot de passe. 
+		  		Mes connaissances en cyber-sÃ©curitÃ© Ã©tant limitÃ©es, je ne garantis pas la complÃ¨te sÃ©curitÃ© de vos identifiants ou mot de passe. 
 		  		<br />
-		  		Je vous conseille donc fortement d'utiliser un mot de passe différent de ceux dont vous avez l'habitude.
+		  		Je vous conseille donc fortement d'utiliser un mot de passe diffÃ©rent de ceux dont vous avez l'habitude.
 		  </h5>
 
 	<?php

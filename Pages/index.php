@@ -4,6 +4,7 @@ include 'session_start.php';
 <html>
 <HEAD>
 	<title>Accueil</title>
+	<meta charset="UTF-8">
 </HEAD>
 <body>
 
@@ -12,11 +13,7 @@ include 'session_start.php';
 <?php
 
 include '../Scripts/global.php';
-
-include 'header.php';
-
-?>
-
+include 'header.php';?>
 <div id="wrapper">
 
 <div id="content">

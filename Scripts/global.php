@@ -1,10 +1,10 @@
 <?php
 
-// Afficher les erreurs à l'écran
+// Afficher les erreurs Ã  l'Ã©cran
 ini_set('display_errors', 1);
 // Enregistrer les erreurs dans un fichier de log
 ini_set('log_errors', 1);
-// Nom du fichier qui enregistre les logs (attention aux droits à l'écriture)
+// Nom du fichier qui enregistre les logs (attention aux droits d'Ã©criture)
 ini_set('error_log', dirname(__file__) . '/logs/log_error_php.txt');
 
 //PARAMETRES ET BDD
@@ -18,7 +18,7 @@ try{
 		echo "connexion echouee : " . $e->getMessage();
 	}
 } catch(Exception $e) {
-    echo "Impossible d'accéder à la base de données SQL : ".$e->getMessage();
+    echo "Impossible d'accÃ©der Ã  la base de donnÃ©es SQL : ".$e->getMessage();
     die();
 }
 ?>
