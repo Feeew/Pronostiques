@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 include 'session_start.php';
 include '../Scripts/test_session.php';
 if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false){
@@ -47,7 +47,7 @@ include 'header.php';
 		}
 		else{ 
 			?>
-			<h4>Tous les tournois termin�s :</h4><br />
+			<h4>Tous les tournois terminés :</h4><br />
 			<form action='tournoi.php' id='form_tournoi' method='post'>
 			<table>
 			<?php

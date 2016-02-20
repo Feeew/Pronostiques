@@ -3,6 +3,8 @@ include '../Pages/session_start.php';
 
 include 'global.php';
 
+header('Content-Type: text/plain; charset=utf-8');
+
 $tournoi_id = $_POST["tournoi_id"];
 $user_id = $_POST["user_id"];
 $message = $_POST["message"];

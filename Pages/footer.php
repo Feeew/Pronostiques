@@ -1,4 +1,4 @@
-<div id="footer"></div>
+﻿<div id="footer"></div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-1.8.3.js"></script>

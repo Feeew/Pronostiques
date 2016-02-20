@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 include 'session_start.php';
 include '../Scripts/test_session.php';
 
@@ -9,7 +9,6 @@ $ajout = 0;
 if(isset($_POST['message']))
 {
 	if($_POST['message'] != null && $_POST['message'] != ""){
-			echo "<h1>lol</h1>";
 			$sql = $db->prepare("INSERT INTO Suggestions (Username, Message, CDate) VALUES (:username, :message, :CDate)");
 			$result = $sql->execute(array(
 				'username'	=> $_SESSION['username'],

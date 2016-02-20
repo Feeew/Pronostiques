@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 include 'session_start.php';
 include '../Scripts/test_session.php';
 if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false){
