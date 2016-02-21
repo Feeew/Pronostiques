@@ -6,7 +6,7 @@ include '../Scripts/global.php';
 ?>
 <html>
 <head>
-	<title>Inscription à un tournoi</title>
+	<title>Inscription &agrave; un tournoi</title>
 </head>
 <body>
 
@@ -19,7 +19,7 @@ include '../Scripts/global.php';
 
 <div id="content">
 
-<h1>Inscription à un tournoi</h1></br>
+<h1>Inscription &agrave; un tournoi</h1></br>
 <?php
 
 if (!isset($_POST['tournoi_id']))
@@ -88,9 +88,9 @@ if (!isset($_POST['tournoi_id']))
 				'match_id'	=> $row["ID"]
 			));
 		}
-		echo "<b>Inscription terminée. Bonne chance !</b>"; 
+		echo "<b>Inscription termin&eacute;e. Bonne chance !</b>"; 
 		echo "<br />";
-		echo "<a href='mesTournois.php'>Retour à la liste de mes tournois</a>";
+		echo "<a href='mesTournois.php'>Retour &agrave; la liste de mes tournois</a>";
 	}
 	catch(Exception $e){
 		echo "Erreur dans l'inscription au tournoi : ".$e->getMessage();

@@ -28,8 +28,8 @@
 		  <ul class="dropdown-menu">
 			<li><a href="mesTournois.php">Mes tournois actuels</a></li>
 			<li class="divider"></li>
-			<?php if(isset($_SESSION["grade"]) && $_SESSION["grade"]==2){ ?><li><a href="creation_tournoi.php">Créer un tournoi</a></li> <?php } ?>
-			<li><a href="inscription_tournoi.php">S'inscrire à un tournoi</a></li>
+			<?php if(isset($_SESSION["grade"]) && $_SESSION["grade"]==2){ ?><li><a href="creation_tournoi.php">Cr&eacute;er un tournoi</a></li> <?php } ?>
+			<li><a href="inscription_tournoi.php">S'inscrire &agrave; un tournoi</a></li>
 			<li class="divider"></li>
 			<li><a href="historiqueTournois.php">Historique des tournois</a></li>
 		  </ul>
@@ -43,8 +43,8 @@
 		if($_SESSION['connected'] == true){
 			?>
 				<ul class="nav navbar-nav navbar-right">
-				  <li class="connectedAs">Vous êtes connecté en tant que <b><span id="username"><?php echo $_SESSION['username'];?></span></b>.&nbsp;&nbsp;</li>
-				  <li><a href="../Scripts/logout.php">Se déconnecter</a></li>
+				  <li class="connectedAs">Vous êtes connect&eacute; en tant que <b><span id="username"><?php echo $_SESSION['username'];?></span></b>.&nbsp;&nbsp;</li>
+				  <li><a href="../Scripts/logout.php">Se d&eacute;connecter</a></li>
 				</ul>
 			<?php
 		}

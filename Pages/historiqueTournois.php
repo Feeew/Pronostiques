@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 include 'session_start.php';
 include '../Scripts/test_session.php';
 if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false){
@@ -43,11 +43,11 @@ include 'header.php';
 		<br/>
 		<?php 
 		if(count($tournois) == 0){ 
-			echo "<h4>Aucun tournoi n'est pr�sent dans l'historique.</h4>";
+			echo "<h4>Aucun tournoi n'est pr&eacute;sent dans l'historique.</h4>";
 		}
 		else{ 
 			?>
-			<h4>Tous les tournois terminés :</h4><br />
+			<h4>Tous les tournois termin&eacute;s :</h4><br />
 			<form action='tournoi.php' id='form_tournoi' method='post'>
 			<table>
 			<?php
