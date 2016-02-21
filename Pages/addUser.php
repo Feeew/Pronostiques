@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include 'session_start.php';
 ?>
 <html>
@@ -41,7 +41,7 @@ if (isset($_POST['password']) && isset($_POST['username']))
 			'username'	=> strtoupper($username),
 			'password'	=> strtoupper($password)
 		));
-		echo "Ajout r�ussi! Bienvenu, $username.";
+		echo "Ajout r&eacute;ussi! Bienvenu, $username.";
 	}
 	catch(Exception $e){
 		echo "Erreur dans l'ajout du compte : ".$e->getMessage();
@@ -66,9 +66,9 @@ else
 		</form>
 
 		  <h5 style='color:red;'>
-		  		Mes connaissances en cyber-sécurité étant limitées, je ne garantis pas la complète sécurité de vos identifiants ou mot de passe. 
+		  		Mes connaissances en cyber-s&eacute;curit&eacute; &eacute;tant limit&eacute;es, je ne garantis pas la compl&egrave;te s&eacute;curit&eacute; de vos identifiants ou mot de passe. 
 		  		<br />
-		  		Je vous conseille donc fortement d'utiliser un mot de passe différent de ceux dont vous avez l'habitude.
+		  		Je vous conseille donc fortement d'utiliser un mot de passe diff&eacute;rent de ceux dont vous avez l'habitude.
 		  </h5>
 
 	<?php

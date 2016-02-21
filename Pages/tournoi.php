@@ -1,11 +1,11 @@
-﻿<?php 
+<?php 
 include 'session_start.php';
 include '../Scripts/test_session.php';
-
 ?>
 <html>
 <head>
 	<title>Tournoi</title>
+	<meta charset="utf-8" />
 </head>
 <body>
 
@@ -48,12 +48,12 @@ else{
 	?>
 		<br />
 		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Comment modifier son score : </h4>
-		<p>Cliquez sur votre pseudo dans le tableau (Noir gras souligné Les scores des matchs non-joués deviennent alors modifiables. Cliquez à nouveau sur votre pseudo pour valider les scores.</p>
+		<p>Cliquez sur votre pseudo dans le tableau (Noir gras soulign&eacute; Les scores des matchs non-jou&eacute;s deviennent alors modifiables. Cliquez &agrave; nouveau sur votre pseudo pour valider les scores.</p>
 		<br/>
-		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Quelques règles : </h4>
-		<p>Un bon pronostique donne 3 points. Un écart de 5 points ou moins entre l'écart de votre score et l'écart du résultat final donne 2 points bonus.</p>
+		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Quelques r&egrave;gles : </h4>
+		<p>Un bon pronostique donne 3 points. Un &eacute;cart de 5 points ou moins entre l'&eacute;cart de votre score et l'&eacute;cart du r&eacute;sultat final donne 2 points bonus.</p>
 		<p></p>
-		<p>Par exemple, si vous pronostiquez 15-11, l'écart est de 4. Si le résultat final est 17-15, l'écart est de 2. La différence des écarts est de 2 (4-2), donc vous marquez 2 points bonus, pour un total de 5 points.</p>
+		<p>Par exemple, si vous pronostiquez 15-11, l'&eacute;cart est de 4. Si le r&eacute;sultat final est 17-15, l'&eacute;cart est de 2. La diff&eacute;rence des &eacute;carts est de 2 (4-2), donc vous marquez 2 points bonus, pour un total de 5 points.</p>
 		<br/>
 		<div class="Tableau">
 		<table id="tournoi_pronostic" class='tournoi_pronostic'>
@@ -68,7 +68,7 @@ else{
 							echo "<th colspan='3' class='th_joueur' id='".$row['Username']."' style='font-weight:bold; color:black; text-decoration:underline;' onclick='mod_score(\"".strtoupper($row['Username'])."\")'>".$row["Username"]."</th>";
 						else echo "<th class='th_joueur' colspan='3'>".$row["Username"]."</th>";
 					}
-					echo "<th colspan='2' class='th_resultat'>Résultats</th>";
+					echo "<th colspan='2' class='th_resultat'>R&eacute;sultats</th>";
 			?>
 			</tr>
 		
@@ -187,7 +187,7 @@ if($_SESSION["grade"]==2) {
 <fieldset>
 	<legend>Partie Admin</legend>
 	<form method="post" id="form_mod_result">
-		<h4>Changer le résultat d'un match</h4><br />
+		<h4>Changer le r&eacute;sultat d'un match</h4><br />
 		<select id="mod_id">
 			<?php echo $options;?>
 		</select>
@@ -227,7 +227,7 @@ if($_SESSION["grade"]==2) {
 
 
 <fieldset class="hidden">
-	<legend>Rapport d'activité</legend>
+	<legend>Rapport d'activit&eacute;</legend>
 	<div id="bugs"></div>
 </fieldset>
 <input class="hidden" type="button" value="Vider" onclick="document.getElementById('bugs').innerHTML=''" />
