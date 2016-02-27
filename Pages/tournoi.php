@@ -75,6 +75,7 @@ else{
 		<?php 
 			if($_SESSION["grade"]==2) $options = "";
 			date_default_timezone_set('CET');
+			//Boucle qui parcourt tous les matchs
 			foreach($result_equipes as $row1){
 				$score_match1 = ($row1["score1"] != null) ? $row1["score1"] : "-";
 				$score_match2 = ($row1["score2"] != null) ? $row1["score2"] : "-";
@@ -92,6 +93,7 @@ else{
 					{
 						$options.="<option value='".$row1["ID"]."'>".$row1["Equipe1"]." / ".$row1["Equipe2"]."</option>";
 					}
+				//Boucle qui parcourt tous les joueurs pour chaque match
 				foreach($result_joueurs as $row2){
 						$scores = $db->prepare("SELECT Score1, Score2 FROM Pronostic WHERE ID_Tournoi = ".$tournoi_id." AND ID_user = ".$row2["ID"]." AND ID_Match = ".$row1["ID"]." ORDER BY ID_User");
 						$scores->execute();
@@ -101,22 +103,35 @@ else{
 						$score2 = $result_scores[0]["Score2"];
 						$points = "-";
 						$str_points = "<td class='points case_result'>".$points."</td>";
+						//Si le match est terminé et que les scores ont été renseigné
 						if($match_termine==1 && ($score1!="-" || $score2!="-")){
+							//Si les scores sont bons
 							if((($score_match1-$score_match2)>0 && ($score1-$score2)>0) || (($score_match2-$score_match1)>0 && ($score2-$score1)>0)) 
 							{
 								$points = 3;
 								$ecart_point = abs(abs($score_match2-$score_match1) - abs($score2 - $score1));
+								//Si l'écart de point est bon
 								if($ecart_point <= 5  && $ecart_point >= 0)
 									$points += 2;
 								$str_points="<td class='correct case_result'>".$points."</td>";
 							}
+							//Si les scores ne sont pas bons
 							else{
 								$points=0;
 								$str_points="<td class='incorrect case_result'>".$points."</td>";
 							}
 						}
-						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) echo "<td class='result case_result ".$row2["Username"]."'>".$score1."</td><td class='result case_result ".$row2["Username"]."'>".$score2."</td>".$str_points;
-						else echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
+						
+						//Si l'utilisateur connecté est celui dont on affiche les résultats
+						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) 
+							echo "<td class='result case_result ".$row2["Username"]."'>".$score1."</td><td class='result case_result ".$row2["Username"]."'>".$score2."</td>".$str_points;
+						else{
+							if($match_termine == 1 || ($score1 == 0 && $score2 == 0))
+								echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
+							else							
+								echo "<td class='result case_result'>X</td><td class='result case_result'>X</td>".$str_points;
+						}
+							
 
 						if($points > 0) $tab_scores[$row2["Username"]] = $tab_scores[$row2["Username"]] + $points;
 				}
