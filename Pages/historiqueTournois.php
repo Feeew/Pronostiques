@@ -77,6 +77,7 @@ include 'header.php';
 			</table>
 			<input type='hidden' id="tournoi_id" value="" name='tournoi_id'/>
 			<input type='hidden' value='' id="tournoi_nom" name="tournoi_nom"/>
+			<input type='hidden' value='' id="tournoi_sport" name="tournoi_sport"/>
 		</form>
 			<?php
 		}
