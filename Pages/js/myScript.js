@@ -3,9 +3,10 @@ function submit_inscription_tournoi(tournoi_id){
 	document.forms["all_tournois_form"].submit();
 }
 
-function go_to_tournoi(tournoi_id, tournoi_nom){
+function go_to_tournoi(tournoi_id, tournoi_nom, tournoi_sport){
 	document.getElementById("tournoi_id").value = tournoi_id;
 	document.getElementById("tournoi_nom").value = tournoi_nom;
+	document.getElementById("tournoi_sport").value = tournoi_sport;
 	document.forms["form_tournoi"].submit();
 }
 

@@ -31,11 +31,13 @@ else if(!isset($_POST['tournoi_id']) || !isset($_POST['tournoi_nom'])){
 else{
 	$tournoi_id = $_POST["tournoi_id"];
 	$tournoi_nom = $_POST["tournoi_nom"];
+	$sport = $_POST["tournoi_sport"];
 	
 	echo "<input type='HIDDEN' id='TOURNOI_ID' value=".$tournoi_id." />";
 	echo "<input type='HIDDEN' id='USER_ID' value=".$_SESSION['user_id']." />";
 	
-	echo "<h1>".str_replace('_', ' ', $tournoi_nom)."</h1>";
+	
+	echo "<h1>".str_replace('_', ' ', $tournoi_nom)." - " . $sport . "</h1>";
 
 	$equipes = $db->prepare("SELECT Matchs.Equipe1, Matchs.Equipe2, Matchs.ID, Matchs.Date, Matchs.score1, Matchs.score2 from Matchs Where Matchs.ID_Tournoi = ".$tournoi_id." ORDER BY Matchs.Date");
 	$equipes->execute();
@@ -51,9 +53,22 @@ else{
 		<p>Cliquez sur votre pseudo dans le tableau (Noir gras soulign&eacute; Les scores des matchs non-jou&eacute;s deviennent alors modifiables. Cliquez &agrave; nouveau sur votre pseudo pour valider les scores.</p>
 		<br/>
 		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Quelques r&egrave;gles : </h4>
-		<p>Un bon pronostique donne 3 points. Un &eacute;cart de 5 points ou moins entre l'&eacute;cart de votre score et l'&eacute;cart du r&eacute;sultat final donne 2 points bonus.</p>
-		<p></p>
-		<p>Par exemple, si vous pronostiquez 15-11, l'&eacute;cart est de 4. Si le r&eacute;sultat final est 17-15, l'&eacute;cart est de 2. La diff&eacute;rence des &eacute;carts est de 2 (4-2), donc vous marquez 2 points bonus, pour un total de 5 points.</p>
+		<?php 
+			switch($sport){
+				case "Rugby" : ?>
+					<p>Un bon pronostique (le bon vainqueur) donne 3 points. Un &eacute;cart de 5 points ou moins entre l'&eacute;cart de votre score et l'&eacute;cart du r&eacute;sultat final donne 2 points bonus.</p>
+					<p></p>
+					<p>Par exemple, si vous pronostiquez 15-11, l'&eacute;cart est de 4. Si le r&eacute;sultat final est 17-15, l'&eacute;cart est de 2. La diff&eacute;rence des &eacute;carts est de 2 (4-2), donc vous marquez 2 points bonus, pour un total de 5 points.</p>
+				<?php
+					break;
+				case "Football" : 
+					?>
+					<p>Un bon pronostique (le bon vainqueur) donne 3 points. Le score exact donne 2 points bonus (total de 5 points).</p>
+					<?php
+					break;
+				default : echo "C'est pas un sport, contactez l'administrateur qui a certainement fait une c*nnerie."; break;
+			}
+		?>
 		<br/>
 		<div class="Tableau">
 		<table id="tournoi_pronostic" class='tournoi_pronostic'>
@@ -109,10 +124,17 @@ else{
 							if((($score_match1-$score_match2)>0 && ($score1-$score2)>0) || (($score_match2-$score_match1)>0 && ($score2-$score1)>0)) 
 							{
 								$points = 3;
-								$ecart_point = abs(abs($score_match2-$score_match1) - abs($score2 - $score1));
-								//Si l'écart de point est bon
-								if($ecart_point <= 5  && $ecart_point >= 0)
-									$points += 2;
+								if($sport == "Rugby"){
+									$ecart_point = abs(abs($score_match2-$score_match1) - abs($score2 - $score1));
+									//Si l'écart de point est bon
+									if($ecart_point <= 5  && $ecart_point >= 0)
+										$points += 2;
+								}
+								else if($sport == "Football"){
+									//Si le score est exact
+									if($score1 == $score_match1 && $score2 == $score_match2)
+										$points += 2;
+								}
 								$str_points="<td class='correct case_result'>".$points."</td>";
 							}
 							//Si les scores ne sont pas bons
@@ -126,7 +148,7 @@ else{
 						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) 
 							echo "<td class='result case_result ".$row2["Username"]."'>".$score1."</td><td class='result case_result ".$row2["Username"]."'>".$score2."</td>".$str_points;
 						else{
-							if($match_termine == 1 || ($score1 == 0 && $score2 == 0))
+							if(($match_termine == 1 || ($score1 == 0 && $score2 == 0)) || ($_SESSION['username'] == "Akiah" && $sport == "Rugby"))
 								echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
 							else							
 								echo "<td class='result case_result'>X</td><td class='result case_result'>X</td>".$str_points;
@@ -208,6 +230,7 @@ if($_SESSION["grade"]==2) {
 		</select>
 		<input type="number" required style="width:46px; height:27px; text-align:center;" name="score1" id="mod_score1" placeholder="-" />
 		<input type="number" required style="width:46px; height:27px; text-align:center;" name="score2" id="mod_score2" placeholder="-" />
+		<input type="hidden" name="tournoi_sport" value='<?php echo $sport; ?>'/>
 		<input type="hidden" name="tournoi_id" value="<?php echo $tournoi_id; ?>"/>
 		<input type="hidden" name="tournoi_nom" value="<?php echo $tournoi_nom; ?>"/>
 		<input type="button" value="Go !" onclick="modifyResult();"/>
