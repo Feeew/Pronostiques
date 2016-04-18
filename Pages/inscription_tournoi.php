@@ -44,6 +44,7 @@ if (!isset($_POST['tournoi_id']))
 		echo "<form method='post' action='".$_SERVER['PHP_SELF']."' id='all_tournois_form'>";
 		echo "<table id='inscription_tournoi'>";
 		for($i = 0; $i < count($tournois); $i++){
+			$sport = (($tournois[$i]['Sport'] == "foot") ? "Football" : (($tournois[$i]['Sport'] == "rugby") ? "Rugby" : ""));
 			echo "
 				<tr>
 					<td>
@@ -53,7 +54,8 @@ if (!isset($_POST['tournoi_id']))
 							  <span class='input-group-btn'>
 									<button onclick=submit_inscription_tournoi(".$tournois[$i]["ID"].") class='btn btn-default' type='button'>S'inscrire</button>
 							  </span>
-							  <span class='tournoi_name' onclick='submit_inscription_tournoi(\"".$tournois[$i]['ID']."\")'>".$tournois[$i]['Nom']."</span>
+							  <span class='tournoi_name' onclick='submit_inscription_tournoi(\"".$tournois[$i]['ID']."\")'> " . $tournois[$i]['Nom']."<span style='float:right'> - ".$sport."</span></span>
+							  
 							</div>
 						  </div>
 						</div>

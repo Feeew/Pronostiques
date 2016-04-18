@@ -52,6 +52,7 @@ include 'header.php';
 			<table>
 			<?php
 				for($i = 0; $i<count($tournois); $i++){
+					$sport = (($tournois[$i]['Sport'] == "foot") ? "Football" : (($tournois[$i]['Sport'] == "rugby") ? "Rugby" : ""));
 					?>
 						<tr>
 							<td>
@@ -60,10 +61,10 @@ include 'header.php';
 									<div class="input-group">
 									  <span class="input-group-btn">
 										<?php 
-											echo "<button onclick='go_to_tournoi(\"".$tournois[$i]['ID']."\",\"".str_replace(' ', '_', $tournois[$i]['Nom'])."\")' class='btn btn-default' type='button'>Voir</button>";
+											echo "<button onclick='go_to_tournoi(\"".$tournois[$i]['ID']."\",\"".str_replace(' ', '_', $tournois[$i]['Nom'])."\", \"".$sport."\")' class='btn btn-default' type='button'>Voir</button>";
 										?>
 									  </span>
-									  <span class="tournoi_name" onclick='go_to_tournoi("<?php echo $tournois[$i]['ID'];?>", "<?php echo str_replace(' ', '_', $tournois[$i]['Nom'])?>")'><?php echo $tournois[$i]['Nom'];?></span>
+									  <span class="tournoi_name" onclick='go_to_tournoi("<?php echo $tournois[$i]['ID'];?>", "<?php echo str_replace(' ', '_', $tournois[$i]['Nom'])?>", "<?php echo $sport; ?>")'><?php echo $tournois[$i]['Nom'];?><span style='float:right'> - <?php echo $sport; ?></span></span>
 									</div><!-- /input-group -->
 								  </div><!-- /.col-lg-6 -->
 								</div><!-- /.row -->

@@ -37,8 +37,12 @@ echo "<h5>Afin de cr&eacute;er un tournoi, merci d'indiquer son nom et sa date d
 			  <span onclick="document.getElementById('DateFin').focus();" class="input-group-addon"><div class="glyphicon glyphicon-calendar"></div></span>
 			  <input tabindex=4 id="DateFin" type="text" name="DateFin" class="form-control" placeholder="Date de fin (YYYY-MM-DD)" required />
 			</div>
+			<div class="input-group formAjout">
+			  <span onclick="document.getElementById('Sport').focus();" class="input-group-addon"><div class="glyphicon glyphicon-th-list"></div></span>
+			  <select class="form-control" tabindex=5 name="Sport" id="Sport"><option value='foot'>Football</option><option selected value="rugby">Rugby</option></select>
+			</div>
 		</div>
-		<button tabindex=5 type="submit" class="btn btn-default">Cr&eacute;er tournoi</button>
+		<button tabindex=6 type="submit" class="btn btn-default">Cr&eacute;er tournoi</button>
 	</form>
 <?php
 }
@@ -48,6 +52,7 @@ else
 	$datecreation = date("Y-m-d");
 	$tournoi_nom = $_POST["Nom"];
 	$tournoi_dateFin = $_POST["DateFin"];
+	$sport = $_POST["Sport"];
 	
 	try{
 		$sql = $db->prepare("SELECT * FROM Tournoi WHERE Nom = :Nom");
@@ -64,12 +69,13 @@ else
 			echo "<a href='creation_tournoi.php'>Retour &agrave; la cr&eacute;ation d'un tournoi</a>";
 		}
 		else{
-			$sql = $db->prepare("INSERT INTO Tournoi (Nom, DateFin, User_id, DateCreation) VALUES (:Nom, :DateFin, :user_id, :datecreation)");
+			$sql = $db->prepare("INSERT INTO Tournoi (Nom, DateFin, User_id, DateCreation, Sport) VALUES (:Nom, :DateFin, :user_id, :datecreation, :sport)");
 			$result = $sql->execute(array(
 				'Nom'	=> $tournoi_nom,
 				'DateFin'	=> $tournoi_dateFin,
 				'user_id'	=> $user_id,
-				'datecreation'	=> $datecreation
+				'datecreation'	=> $datecreation,
+				'sport'	=> $sport,
 			));
 			
 			echo "<b>Cr&eacute;ation termin&eacute;e. N'oubliez pas de vous y inscrire !</b>"; 
