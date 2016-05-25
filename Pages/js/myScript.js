@@ -1,11 +1,12 @@
-﻿function submit_inscription_tournoi(tournoi_id){
+function submit_inscription_tournoi(tournoi_id){
 	document.getElementById("tournoi_id").value = tournoi_id;
 	document.forms["all_tournois_form"].submit();
 }
 
-function go_to_tournoi(tournoi_id, tournoi_nom){
+function go_to_tournoi(tournoi_id, tournoi_nom, tournoi_sport){
 	document.getElementById("tournoi_id").value = tournoi_id;
 	document.getElementById("tournoi_nom").value = tournoi_nom;
+	document.getElementById("tournoi_sport").value = tournoi_sport;
 	document.forms["form_tournoi"].submit();
 }
 
@@ -172,3 +173,29 @@ function addMatch(){
 		}
 	});
 }
+
+function addMessage(){
+	var tournoi_id = document.getElementById("TOURNOI_ID").value;
+	var user_id = document.getElementById("USER_ID").value;
+	var message = document.getElementById("message").value;
+	
+	$.ajax({
+		type: "POST",
+		url: "../Scripts/addMessage.php",
+		context: document.body,
+		data:{
+			tournoi_id:tournoi_id,
+			user_id:user_id,
+			message:message
+		},
+		success: function(data){
+			data = JSON.parse(data);
+			$("<tr class='tr_input_message'><td class='nom_message'>" + data["date"] + "</td><td class='nom_message'>" + data["Username"] + "</td><td class='message'>" + message + "</td></tr>").insertBefore($(".tr_input_message").first());
+			$($(".tr_input_message")[1]).attr("class", "");
+			$("#message").val("");
+		}
+	});
+}
+
+/*CSS POUR LA MESSAGERIE*/
+//$(".messagerie")/.css("height", $("#div_final_results")[0].offsetHeight);

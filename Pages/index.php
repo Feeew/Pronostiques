@@ -4,6 +4,7 @@ include 'session_start.php';
 <html>
 <HEAD>
 	<title>Accueil</title>
+	<meta charset="UTF-8">
 </HEAD>
 <body>
 
@@ -12,11 +13,7 @@ include 'session_start.php';
 <?php
 
 include '../Scripts/global.php';
-
-include 'header.php';
-
-?>
-
+include 'header.php';?>
 <div id="wrapper">
 
 <div id="content">
@@ -44,7 +41,7 @@ if(isset($_GET["err"])){
 <h4>Derniers ajouts</h4>
 <h5>V1.4 - 1 Avril 2014</h5>
 <p>Ajout d'une partie Administration sur la page des pronostics d'un tournoi permettant &agrave; un administrateur de modifier le r&eacute;sultat d'un match.</p>
-<p>Ajout d'un message d'alerte lors de l'inscription à propos de la cyber-sécurité.</p>
+<p>Ajout d'un message d'alerte lors de l'inscription &agrave; propos de la cyber-s&eacute;curit&eacute;.</p>
 
 <br />
 <h5>V1.3 - 25 Mars 2014</h5>

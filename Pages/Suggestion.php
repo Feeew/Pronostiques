@@ -9,7 +9,6 @@ $ajout = 0;
 if(isset($_POST['message']))
 {
 	if($_POST['message'] != null && $_POST['message'] != ""){
-			echo "<h1>lol</h1>";
 			$sql = $db->prepare("INSERT INTO Suggestions (Username, Message, CDate) VALUES (:username, :message, :CDate)");
 			$result = $sql->execute(array(
 				'username'	=> $_SESSION['username'],
@@ -56,18 +55,51 @@ include 'header.php';
 		}
 		if($_SESSION['grade'] == 2){
 	?>
-	<h3>Liste des suggestions</h3>
+	<h3>Liste des suggestions Faites</h3>
 	<table id="suggestions">
-		<tr><th>Utilisateur</th><th>Date</th><th>Suggestion</th></tr>
+		<tr><th>Utilisateur</th><th>Date</th><th colspan="2">Suggestion</th></tr>
 		<?php
-			$sql = $db->prepare("SELECT * FROM Suggestions ORDER BY CDate DESC");
+			$sql = $db->prepare("SELECT * FROM Suggestions where importance=1 ORDER BY CDate DESC");
 			$sql->execute();
 			$suggestions = $sql->fetchAll();
 			foreach($suggestions as $suggestion){
-				echo "<tr><td>".$suggestion['Username']."</td><td>".$suggestion['CDate']."</td><td class='message'>".$suggestion['Message']."</td></tr>";
+				echo ('<tr>');
+				echo ('<td>'.$suggestion['Username']."</td><td>".$suggestion['CDate']."</td><td class='message'>".$suggestion['Message'].'</td><td><a href="traiter_suggestion.php?id='.$suggestion['ID'].'"><img src="img/oeil.png"></a></td></tr>');
 			}
+			
 		?>
 	</table>
+	
+	<h3>Liste des suggestions a faire</h3>
+	<table id="suggestions">
+		<tr><th>Utilisateur</th><th>Date</th><th colspan="2">Suggestion</th></tr>
+		<?php
+			$sql = $db->prepare("SELECT * FROM Suggestions where importance=2 ORDER BY CDate DESC");
+			$sql->execute();
+			$suggestions = $sql->fetchAll();
+			foreach($suggestions as $suggestion){
+				echo ('<tr>');
+				echo ('<td>'.$suggestion['Username']."</td><td>".$suggestion['CDate']."</td><td class='message'>".$suggestion['Message'].'</td><td><a href="traiter_suggestion.php?id='.$suggestion['ID'].'"><img src="img/oeil.png"></a></td></tr>');
+			}
+			
+		?>
+	</table>
+	
+		<h3>Liste des suggestions en attente</h3>
+	<table id="suggestions">
+		<tr><th>Utilisateur</th><th>Date</th><th colspan="2">Suggestion</th></tr>
+		<?php
+			$sql = $db->prepare("SELECT * FROM Suggestions where importance=3 ORDER BY CDate DESC");
+			$sql->execute();
+			$suggestions = $sql->fetchAll();
+			foreach($suggestions as $suggestion){
+				echo ('<tr>');
+				echo ('<td>'.$suggestion['Username']."</td><td>".$suggestion['CDate']."</td><td class='message'>".$suggestion['Message'].'</td><td><a href="traiter_suggestion.php?id='.$suggestion['ID'].'"><img src="img/oeil.png"></a></td></tr>');
+			}
+			
+		?>
+	</table>
+	
 	<?php
 		}
 	?>
