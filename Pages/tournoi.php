@@ -5,6 +5,7 @@ include '../Scripts/test_session.php';
 <html>
 <head>
 	<title>Tournoi</title>
+	<meta charset="utf-8" />
 </head>
 <body>
 
@@ -30,11 +31,13 @@ else if(!isset($_POST['tournoi_id']) || !isset($_POST['tournoi_nom'])){
 else{
 	$tournoi_id = $_POST["tournoi_id"];
 	$tournoi_nom = $_POST["tournoi_nom"];
+	$sport = $_POST["tournoi_sport"];
 	
 	echo "<input type='HIDDEN' id='TOURNOI_ID' value=".$tournoi_id." />";
 	echo "<input type='HIDDEN' id='USER_ID' value=".$_SESSION['user_id']." />";
 	
-	echo "<h1>".str_replace('_', ' ', $tournoi_nom)."</h1>";
+	
+	echo "<h1>".str_replace('_', ' ', $tournoi_nom)." - " . $sport . "</h1>";
 
 	$equipes = $db->prepare("SELECT Matchs.Equipe1, Matchs.Equipe2, Matchs.ID, Matchs.Date, Matchs.score1, Matchs.score2 from Matchs Where Matchs.ID_Tournoi = ".$tournoi_id." ORDER BY Matchs.Date");
 	$equipes->execute();
@@ -44,18 +47,28 @@ else{
 	$joueurs->execute();
 	$result_joueurs = $joueurs->fetchAll();
 	
-	//Ancienne fonction avec l'icone "crayon" pour modifier
-	//if(strtoupper($row["Username"]) == strtoupper($_SESSION['username']) || 1==1) echo "<td colspan='3' id=".strtoupper($row['Username'])."><span class='th_edit'>".$row["Username"]."</span><span onclick='mod_score(\"".strtoupper($row['Username'])."\")' style='float:right;' class='glyphicon glyphicon-pencil'></span></td>";
-		
 	?>
 		<br />
 		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Comment modifier son score : </h4>
-		<p>Cliquez sur votre pseudo dans le tableau (Noir gras souligné). Les scores des matchs non-joués deviennent alors modifiables. Cliquez à nouveau sur votre pseudo pour valider les scores.</p>
+		<p>Cliquez sur votre pseudo dans le tableau (Noir gras soulign&eacute; Les scores des matchs non-jou&eacute;s deviennent alors modifiables. Cliquez &agrave; nouveau sur votre pseudo pour valider les scores.</p>
 		<br/>
-		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Quelques règles : </h4>
-		<p>Un bon pronostique donne 3 points. Un écart de 5 points ou moins entre l'écart de votre score et l'écart du résultat final donne 2 points bonus.</p>
-		<p></p>
-		<p>Par exemple, si vous pronostiquez 15-11, l'écart est de 4. Si le résultat final est 17-15, l'écart est de 2. La différence des écarts est de 2 (4-2), donc vous marquez 2 points bonus, pour un total de 5 points.</p>
+		<h4><span class="glyphicon glyphicon-info-sign" style="top:2px;"></span> Quelques r&egrave;gles : </h4>
+		<?php 
+			switch($sport){
+				case "Rugby" : ?>
+					<p>Un bon pronostique (le bon vainqueur) donne 3 points. Un &eacute;cart de 5 points ou moins entre l'&eacute;cart de votre score et l'&eacute;cart du r&eacute;sultat final donne 2 points bonus.</p>
+					<p></p>
+					<p>Par exemple, si vous pronostiquez 15-11, l'&eacute;cart est de 4. Si le r&eacute;sultat final est 17-15, l'&eacute;cart est de 2. La diff&eacute;rence des &eacute;carts est de 2 (4-2), donc vous marquez 2 points bonus, pour un total de 5 points.</p>
+				<?php
+					break;
+				case "Football" : 
+					?>
+					<p>Un bon pronostique (le bon vainqueur) donne 3 points. Le score exact donne 2 points bonus (total de 5 points).</p>
+					<?php
+					break;
+				default : echo "C'est pas un sport, contactez l'administrateur qui a certainement fait une c*nnerie."; break;
+			}
+		?>
 		<br/>
 		<div class="Tableau">
 		<table id="tournoi_pronostic" class='tournoi_pronostic'>
@@ -70,13 +83,14 @@ else{
 							echo "<th colspan='3' class='th_joueur' id='".$row['Username']."' style='font-weight:bold; color:black; text-decoration:underline;' onclick='mod_score(\"".strtoupper($row['Username'])."\")'>".$row["Username"]."</th>";
 						else echo "<th class='th_joueur' colspan='3'>".$row["Username"]."</th>";
 					}
-					echo "<th colspan='2' class='th_resultat'>Résultats</th>";
+					echo "<th colspan='2' class='th_resultat'>R&eacute;sultats</th>";
 			?>
 			</tr>
 		
 		<?php 
 			if($_SESSION["grade"]==2) $options = "";
 			date_default_timezone_set('CET');
+			//Boucle qui parcourt tous les matchs
 			foreach($result_equipes as $row1){
 				$score_match1 = ($row1["score1"] != null) ? $row1["score1"] : "-";
 				$score_match2 = ($row1["score2"] != null) ? $row1["score2"] : "-";
@@ -94,6 +108,7 @@ else{
 					{
 						$options.="<option value='".$row1["ID"]."'>".$row1["Equipe1"]." / ".$row1["Equipe2"]."</option>";
 					}
+				//Boucle qui parcourt tous les joueurs pour chaque match
 				foreach($result_joueurs as $row2){
 						$scores = $db->prepare("SELECT Score1, Score2 FROM Pronostic WHERE ID_Tournoi = ".$tournoi_id." AND ID_user = ".$row2["ID"]." AND ID_Match = ".$row1["ID"]." ORDER BY ID_User");
 						$scores->execute();
@@ -103,22 +118,42 @@ else{
 						$score2 = $result_scores[0]["Score2"];
 						$points = "-";
 						$str_points = "<td class='points case_result'>".$points."</td>";
+						//Si le match est terminÃ© et que les scores ont Ã©tÃ© renseignÃ©
 						if($match_termine==1 && ($score1!="-" || $score2!="-")){
+							//Si les scores sont bons
 							if((($score_match1-$score_match2)>0 && ($score1-$score2)>0) || (($score_match2-$score_match1)>0 && ($score2-$score1)>0)) 
 							{
 								$points = 3;
-								$ecart_point = abs(abs($score_match2-$score_match1) - abs($score2 - $score1));
-								if($ecart_point <= 5  && $ecart_point >= 0)
-									$points += 2;
+								if($sport == "Rugby"){
+									$ecart_point = abs(abs($score_match2-$score_match1) - abs($score2 - $score1));
+									//Si l'Ã©cart de point est bon
+									if($ecart_point <= 5  && $ecart_point >= 0)
+										$points += 2;
+								}
+								else if($sport == "Football"){
+									//Si le score est exact
+									if($score1 == $score_match1 && $score2 == $score_match2)
+										$points += 2;
+								}
 								$str_points="<td class='correct case_result'>".$points."</td>";
 							}
+							//Si les scores ne sont pas bons
 							else{
 								$points=0;
 								$str_points="<td class='incorrect case_result'>".$points."</td>";
 							}
 						}
-						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) echo "<td class='result case_result ".$row2["Username"]."'>".$score1."</td><td class='result case_result ".$row2["Username"]."'>".$score2."</td>".$str_points;
-						else echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
+						
+						//Si l'utilisateur connectÃ© est celui dont on affiche les rÃ©sultats
+						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) 
+							echo "<td class='result case_result ".$row2["Username"]."'>".$score1."</td><td class='result case_result ".$row2["Username"]."'>".$score2."</td>".$str_points;
+						else{
+							if(($match_termine == 1 || ($score1 == 0 && $score2 == 0)) || ($_SESSION['username'] == "Akiah" && $sport == "Rugby"))
+								echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
+							else							
+								echo "<td class='result case_result'>X</td><td class='result case_result'>X</td>".$str_points;
+						}
+							
 
 						if($points > 0) $tab_scores[$row2["Username"]] = $tab_scores[$row2["Username"]] + $points;
 				}
@@ -130,20 +165,57 @@ else{
 </div>
 
 <br /><br />
+<div id="result_messagerie">
+	<div class="final_results tableau" id="div_final_results" style="margin:0">
+		<table id="final_results" class="tournoi_pronostic"><tr><th class='th_joueur' style="border-right:1px solid black">Joueur</th><th>Score</th></tr>
+			<?php
 
-<div class="final_results tableau" style="margin:0">
-<table id="final_results" class="tournoi_pronostic"><tr><th class='th_joueur' style="border-right:1px solid black">Joueur</th><th>Score</th></tr>
-<?php
-
-	arsort($tab_scores);
+				arsort($tab_scores);
+				
+				foreach($tab_scores as $key=>$value){
+						echo "<tr><td>".$key."</td><td>".$value."</td></tr>";
+				}
+				
+			?>
+		</table>
+	</div>
+	<div class="messagerie">
+		<table id="messagerie_table" class="tournoi_pronostic">
+			<thead>
+				<tr>
+					<th colspan="99">Messagerie</th>
+				</tr>
+			</thead>
+			<?php
+				$messagerie = $db->prepare("SELECT u.Username, m.date, m.message from Messagerie m
+											INNER JOIN Users u ON u.ID = m.idUser
+											WHERE m.idTournoi = " .$tournoi_id. " ORDER BY m.date DESC");
+				$messagerie->execute();
+				$au_moins_un_message = false;
+				while($message = $messagerie->fetch()){
+					echo "<tr class='tr_input_message'>";
+						echo "<td class='nom_message'>".date("Y-m-d H:i:s", $message["date"])."</td>";
+						echo "<td class='nom_message'>".$message["Username"]."</td>";
+						echo "<td class='message'>".$message["message"]."</td>";
+					echo "</tr>";
+					$au_moins_un_message = true;
+				}
+			?>
+			<tfoot>
+				<tr class='tr_input_message'>
+					<td colspan='99'>
+						<input type="text" id="message" name="message" placeholder="Votre message" style="width:93%; text-align:left; padding-left:3px;"/>
+						<input type="button" id="buttonAddMessage" value="Envoyer" style="width:7%; float:right;" onclick="addMessage();" />
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 	
-	foreach($tab_scores as $key=>$value){
-			echo "<tr><td>".$key."</td><td>".$value."</td></tr>";
-	}
 	
-?>
-</table>
+<div class="clear"></div>
 </div>
+
 
 <br /><br />
 <?php 
@@ -152,12 +224,13 @@ if($_SESSION["grade"]==2) {
 <fieldset>
 	<legend>Partie Admin</legend>
 	<form method="post" id="form_mod_result">
-		<h4>Changer le résultat d'un match</h4><br />
+		<h4>Changer le r&eacute;sultat d'un match</h4><br />
 		<select id="mod_id">
 			<?php echo $options;?>
 		</select>
 		<input type="number" required style="width:46px; height:27px; text-align:center;" name="score1" id="mod_score1" placeholder="-" />
 		<input type="number" required style="width:46px; height:27px; text-align:center;" name="score2" id="mod_score2" placeholder="-" />
+		<input type="hidden" name="tournoi_sport" value='<?php echo $sport; ?>'/>
 		<input type="hidden" name="tournoi_id" value="<?php echo $tournoi_id; ?>"/>
 		<input type="hidden" name="tournoi_nom" value="<?php echo $tournoi_nom; ?>"/>
 		<input type="button" value="Go !" onclick="modifyResult();"/>
@@ -192,7 +265,7 @@ if($_SESSION["grade"]==2) {
 
 
 <fieldset class="hidden">
-	<legend>Rapport d'activité</legend>
+	<legend>Rapport d'activit&eacute;</legend>
 	<div id="bugs"></div>
 </fieldset>
 <input class="hidden" type="button" value="Vider" onclick="document.getElementById('bugs').innerHTML=''" />
@@ -208,6 +281,12 @@ if($_SESSION["grade"]==2) {
 
 <script type="text/javascript">
 	$("#DateMatch").datetimepicker({ dateFormat: 'yy-mm-dd' });
+	
+	$("#message").keyup(function(event){
+		if(event.keyCode == 13){
+			$("#buttonAddMessage").click();
+		}
+	});
 </script>
 	
 </body>

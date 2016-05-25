@@ -7,4 +7,4 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <!-- Include my script -->
-<script src="js/myScript.js"></script>
+<script src="js/myScript.js?<?php echo time();?>"></script>
