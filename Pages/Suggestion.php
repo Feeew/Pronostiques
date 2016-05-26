@@ -55,26 +55,12 @@ include 'header.php';
 		}
 		if($_SESSION['grade'] == 2){
 	?>
-	<h3>Liste des suggestions Faites</h3>
-	<table id="suggestions">
-		<tr><th>Utilisateur</th><th>Date</th><th colspan="2">Suggestion</th></tr>
-		<?php
-			$sql = $db->prepare("SELECT * FROM Suggestions where importance=1 ORDER BY CDate DESC");
-			$sql->execute();
-			$suggestions = $sql->fetchAll();
-			foreach($suggestions as $suggestion){
-				echo ('<tr>');
-				echo ('<td>'.$suggestion['Username']."</td><td>".$suggestion['CDate']."</td><td class='message'>".$suggestion['Message'].'</td><td><a href="traiter_suggestion.php?id='.$suggestion['ID'].'"><img src="img/oeil.png"></a></td></tr>');
-			}
-			
-		?>
-	</table>
 	
 	<h3>Liste des suggestions a faire</h3>
 	<table id="suggestions">
 		<tr><th>Utilisateur</th><th>Date</th><th colspan="2">Suggestion</th></tr>
 		<?php
-			$sql = $db->prepare("SELECT * FROM Suggestions where importance=2 ORDER BY CDate DESC");
+			$sql = $db->prepare("SELECT * FROM Suggestions where categorie=1 ORDER BY CDate DESC");
 			$sql->execute();
 			$suggestions = $sql->fetchAll();
 			foreach($suggestions as $suggestion){
@@ -85,11 +71,26 @@ include 'header.php';
 		?>
 	</table>
 	
-		<h3>Liste des suggestions en attente</h3>
+	<h3>Liste des suggestions Faites</h3>
 	<table id="suggestions">
 		<tr><th>Utilisateur</th><th>Date</th><th colspan="2">Suggestion</th></tr>
 		<?php
-			$sql = $db->prepare("SELECT * FROM Suggestions where importance=3 ORDER BY CDate DESC");
+			$sql = $db->prepare("SELECT * FROM Suggestions where categorie=2 ORDER BY CDate DESC");
+			$sql->execute();
+			$suggestions = $sql->fetchAll();
+			foreach($suggestions as $suggestion){
+				echo ('<tr>');
+				echo ('<td>'.$suggestion['Username']."</td><td>".$suggestion['CDate']."</td><td class='message'>".$suggestion['Message'].'</td><td><a href="traiter_suggestion.php?id='.$suggestion['ID'].'"><img src="img/oeil.png"></a></td></tr>');
+			}
+			
+		?>
+	</table>
+	
+	<h3>Liste des suggestions abandonn&eacute;es</h3>
+	<table id="suggestions">
+		<tr><th>Utilisateur</th><th>Date</th><th colspan="2">Suggestion</th></tr>
+		<?php
+			$sql = $db->prepare("SELECT * FROM Suggestions where categorie=3 ORDER BY CDate DESC");
 			$sql->execute();
 			$suggestions = $sql->fetchAll();
 			foreach($suggestions as $suggestion){
