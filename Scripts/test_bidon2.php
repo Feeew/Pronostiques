@@ -67,6 +67,8 @@ if(count($emails) > 0){
 		foreach($matchs as $match){
 			$message .= $match . "<br />";
 		}
+		
+		$message .= "<br /> Lien du site : http://shyrel.byethost6.com";
 		smtpmailer($email, 'seillier.benjamin@gmail.com', 'Benjamin SEILLIER', 'Site de pronostique', $message);
 	}
 }
