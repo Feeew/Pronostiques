@@ -29,9 +29,9 @@ include 'header.php';
 	
 	<?php
 		if(!empty($_POST)){
-			$importance = $_POST['importance'];
-			$sql = $db->prepare("UPDATE `Suggestions` SET importance=? WHERE ID=? ");
-			$sql->execute(array($_POST['importance'],$_POST['id']));
+			$categorie = $_POST['categorie'];
+			$sql = $db->prepare("UPDATE `Suggestions` SET categorie=? WHERE ID=? ");
+			$sql->execute(array($_POST['categorie'],$_POST['id']));
 			
 			echo ("Modification faites !");
 			echo('<a href="Suggestion.php">Retour aux suggestions</a>');
@@ -71,11 +71,10 @@ include 'header.php';
 
 					<td>
 
-						<select name="importance">
-							<option value="1">Fait</option>
-							<option value="2">A faire</option>
-							<option value="3">En attente</option>
-							<option value="4">Poubelle</option>
+						<select name="categorie">
+							<option value="1">A faire</option>
+							<option value="2">Fait</option>
+							<option value="3">Poubelle</option>
 						</select>
 					</td>
 					
