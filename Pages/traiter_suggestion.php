@@ -4,6 +4,15 @@ include '../Scripts/test_session.php';
 
 include '../Scripts/global.php';
 
+	//Traitement des données
+	if(!empty($_POST)){
+		$categorie = $_POST['categorie'];
+		$sql = $db->prepare("UPDATE `Suggestions` SET categorie=? WHERE ID=? ");
+		$sql->execute(array($_POST['categorie'],$_POST['id']));
+		
+		header('Location: Suggestion.php');
+	}
+		
 ?>
 
 <html>
@@ -28,15 +37,6 @@ include 'header.php';
 	
 	
 	<?php
-		if(!empty($_POST)){
-			$categorie = $_POST['categorie'];
-			$sql = $db->prepare("UPDATE `Suggestions` SET categorie=? WHERE ID=? ");
-			$sql->execute(array($_POST['categorie'],$_POST['id']));
-			
-			echo ("Modification faites !");
-			echo('<a href="Suggestion.php">Retour aux suggestions</a>');
-		}
-		
 			if(!empty($_GET['id'])){
 				$sql = $db->prepare("SELECT * FROM Suggestions WHERE ID=?");
 				$sql->execute(array($_GET['id']));
