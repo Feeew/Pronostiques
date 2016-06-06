@@ -116,7 +116,7 @@ else{
 						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s", strtotime("+1 hour"))) ? "1" : "0";
 						$score1 = $result_scores[0]["Score1"];
 						$score2 = $result_scores[0]["Score2"];
-						$points = "-";
+						$points = "";
 						$str_points = "<td class='points case_result'>".$points."</td>";
 						//Si le match est terminé et que les scores ont été renseigné
 						if($match_termine==1 && ($score1!="-" || $score2!="-")){
@@ -148,10 +148,10 @@ else{
 						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) 
 							echo "<td class='result case_result ".$row2["Username"]."'>".$score1."</td><td class='result case_result ".$row2["Username"]."'>".$score2."</td>".$str_points;
 						else{
-							if(($match_termine == 1 || ($score1 == 0 && $score2 == 0)) || ($_SESSION['username'] == "Akiah" && $sport == "Rugby"))
-								echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
+							if(($match_termine == 1 || (is_null($score1) && is_null($score2))) || ($_SESSION['username'] == "Akiah" && $sport == "Rugby"))
+								echo "<td class='result case_result'>x</td><td class='result case_result'>x</td>".$str_points;
 							else							
-								echo "<td class='result case_result'>X</td><td class='result case_result'>X</td>".$str_points;
+								echo "<td class='result case_result'></td><td class='result case_result'></td>".$str_points;
 						}
 							
 
