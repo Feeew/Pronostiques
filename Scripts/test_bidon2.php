@@ -42,8 +42,8 @@ $no_prono = $db->prepare("SELECT
 						INNER JOIN Tournoi ON Inscriptions.ID_Tournoi = Tournoi.ID 
 						INNER JOIN Matchs ON Matchs.ID_Tournoi = Tournoi.ID 
 						INNER JOIN Pronostic ON Pronostic.ID_Match = Matchs.ID AND Pronostic.ID_Tournoi = Tournoi.ID AND Pronostic.ID_User = Users.ID
-						WHERE Pronostic.Score1 = 0 
-						AND Pronostic.Score2 = 0
+						WHERE Pronostic.Score1 IS NULL
+						AND Pronostic.Score2 IS NULL
 						AND Users.Email != ''
 						GROUP BY Matchs.ID, Users.ID"
 						);
