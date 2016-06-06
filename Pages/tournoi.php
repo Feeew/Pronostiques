@@ -63,12 +63,16 @@ else{
 					break;
 				case "Football" : 
 					?>
-					<p>Un bon pronostique (le bon vainqueur) donne 3 points. Le score exact donne 2 points bonus (total de 5 points).</p>
+					<p>Un bon pronostique donne 3 points. Le score exact donne 2 points bonus (total de 5 points).</p>
 					<?php
 					break;
 				default : echo "C'est pas un sport, contactez l'administrateur qui a certainement fait une c*nnerie."; break;
 			}
-		?>
+			?>
+			
+			<br />
+			<p>(Laissez votre curseur sur la date du match pour afficher l'heure)</p>
+			
 		<br/>
 		<div class="Tableau">
 		<table id="tournoi_pronostic" class='tournoi_pronostic'>
@@ -100,7 +104,7 @@ else{
 						echo "<tr id=".$row1["ID"]." class='en_cours'>";
 					 else echo "<tr id=".$row1["ID"].">";
 				echo "
-							<td class='unirow'>".date("d-m-Y", strtotime($row1["Date"]))."</td>
+							<td class='unirow' title='".$row1["Date"]."'><span style='border-bottom:1px dotted black;'>".date("d-m-Y", strtotime($row1["Date"]))."</span></td>
 							<td class='unirow'>".$row1["Equipe1"]."</td>
 							<td class='unirow'>".$row1["Equipe2"]."</td>
 				";
