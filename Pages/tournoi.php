@@ -63,12 +63,16 @@ else{
 					break;
 				case "Football" : 
 					?>
-					<p>Un bon pronostique (le bon vainqueur) donne 3 points. Le score exact donne 2 points bonus (total de 5 points).</p>
+					<p>Un bon pronostique donne 3 points. Le score exact donne 2 points bonus (total de 5 points).</p>
 					<?php
 					break;
 				default : echo "C'est pas un sport, contactez l'administrateur qui a certainement fait une c*nnerie."; break;
 			}
-		?>
+			?>
+			
+			<br />
+			<p>(Laissez votre curseur sur la date du match pour afficher l'heure)</p>
+			
 		<br/>
 		<div class="Tableau">
 		<table id="tournoi_pronostic" class='tournoi_pronostic'>
@@ -100,7 +104,7 @@ else{
 						echo "<tr id=".$row1["ID"]." class='en_cours'>";
 					 else echo "<tr id=".$row1["ID"].">";
 				echo "
-							<td class='unirow'>".date("d-m-Y", strtotime($row1["Date"]))."</td>
+							<td class='unirow' title='".$row1["Date"]."'><span style='border-bottom:1px dotted black;'>".date("d-m-Y", strtotime($row1["Date"]))."</span></td>
 							<td class='unirow'>".$row1["Equipe1"]."</td>
 							<td class='unirow'>".$row1["Equipe2"]."</td>
 				";
@@ -116,12 +120,24 @@ else{
 						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s", strtotime("+1 hour"))) ? "1" : "0";
 						$score1 = $result_scores[0]["Score1"];
 						$score2 = $result_scores[0]["Score2"];
-						$points = "-";
+						$points = "";
 						$str_points = "<td class='points case_result'>".$points."</td>";
 						//Si le match est terminé et que les scores ont été renseigné
-						if($match_termine==1 && ($score1!="-" || $score2!="-")){
+						if($match_termine==1 && $score_match1 != "-" && $score_match2 != "-"){
 							//Si les scores sont bons
-							if((($score_match1-$score_match2)>0 && ($score1-$score2)>0) || (($score_match2-$score_match1)>0 && ($score2-$score1)>0)) 
+							if(
+								(
+									($score_match1-$score_match2)>0 && ($score1-$score2)>0
+								) 
+								|| 
+								(
+									($score_match2-$score_match1)>0 && ($score2-$score1)>0
+								)
+								||
+								(
+									($score_match1 == $score_match2) && ($score1 == $score2)
+								)
+							) 
 							{
 								$points = 3;
 								if($sport == "Rugby"){
@@ -143,15 +159,19 @@ else{
 								$str_points="<td class='incorrect case_result'>".$points."</td>";
 							}
 						}
+
+// || ($_SESSION['username'] == "Akiah" && $sport == "Rugby")
 						
 						//Si l'utilisateur connecté est celui dont on affiche les résultats
-						if((strtoupper($row2["Username"]) == strtoupper($_SESSION['username'])) && $match_termine == 0) 
+						if(strtoupper($row2["Username"]) == strtoupper($_SESSION['username']) && $match_termine == 0)
 							echo "<td class='result case_result ".$row2["Username"]."'>".$score1."</td><td class='result case_result ".$row2["Username"]."'>".$score2."</td>".$str_points;
+						else if($match_termine == 1)
+							echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
 						else{
-							if(($match_termine == 1 || ($score1 == 0 && $score2 == 0)) || ($_SESSION['username'] == "Akiah" && $sport == "Rugby"))
-								echo "<td class='result case_result'>".$score1."</td><td class='result case_result'>".$score2."</td>".$str_points;
-							else							
-								echo "<td class='result case_result'>X</td><td class='result case_result'>X</td>".$str_points;
+							if(is_null($score1) && is_null($score2))
+								echo "<td class='result case_result'>x</td><td class='result case_result'>x</td>".$str_points;
+							else
+								echo "<td class='result case_result'></td><td class='result case_result'></td>".$str_points;
 						}
 							
 
