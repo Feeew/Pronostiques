@@ -83,7 +83,7 @@ if (!isset($_POST['tournoi_id']))
 		$sql->execute();
 		$result = $sql->fetchAll();
 		foreach($result as $row){
-			$sql = $db->prepare("INSERT INTO Pronostic (ID_User, ID_Tournoi, ID_Match, Score1, Score2) VALUES (:user_id, :tournoi_id, :match_id, 0, 0)");
+			$sql = $db->prepare("INSERT INTO Pronostic (ID_User, ID_Tournoi, ID_Match) VALUES (:user_id, :tournoi_id, :match_id)");
 			$result = $sql->execute(array(
 				'user_id'	=> $user_id,
 				'tournoi_id'	=> $tournoi_id,

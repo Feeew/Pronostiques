@@ -12,8 +12,8 @@ foreach($_POST["scores"] as $score){
 	$score1 = $myArray[1];
 	$score2 = $myArray[2];
 
-	if(is_numeric($score1) != 1) $score1=0;
-	if(is_numeric($score2) != 1) $score2=0;
+	if(is_numeric($score1) != 1) $score1=null;
+	if(is_numeric($score2) != 1) $score2=null;
 
 	$requete = "UPDATE Pronostic SET Score1 = $score1, Score2 = $score2 WHERE ID_Tournoi = $tournoi_id AND ID_User = $user_id AND ID_Match = $match_id";
 
