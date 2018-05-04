@@ -9,7 +9,7 @@ ini_set('error_log', dirname(__file__) . '/logs/log_error_php.txt');
 
 //PARAMETRES ET BDD
 try{
-    $dsn = 'mysql:dbname=pronostiques;host=localhost';
+    $dsn = 'mysql:dbname=Rugby2014;host=localhost';
 	$user = 'root';
 	$password = '';
 	try {

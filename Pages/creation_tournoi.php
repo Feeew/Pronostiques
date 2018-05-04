@@ -81,8 +81,77 @@ else
 			echo "<b>Cr&eacute;ation termin&eacute;e. N'oubliez pas de vous y inscrire !</b>"; 
 			echo "<br />";
 			echo "<a href='inscription_tournoi.php'>Retour &agrave; la liste des tournois disponibles</a>";
+
+			require_once('../Scripts/PHPMailer-master/PHPMailerAutoload.php');
+
+
+
+			define('GUSER', 'benji.seillier@gmail.com'); // GMail username
+
+			define('GPWD', 'paddle62'); // GMail password
+
+
+
+			function smtpmailer($to, $from, $from_name, $subject, $body) { 
+
+				global $error;
+
+				$mail = new PHPMailer();  // create a new object
+
+				$mail->IsSMTP(); // enable SMTP
+
+				$mail->SMTPDebug = 2;  // debugging: 1 = errors and messages, 2 = messages only
+
+				$mail->SMTPAuth = true;  // authentication enabled
+
+				$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+
+				$mail->Host = 'smtp.gmail.com';
+
+				$mail->Port = 465; 
+
+				$mail->Username = GUSER;  
+
+				$mail->Password = GPWD;           
+
+				$mail->SetFrom($from, $from_name);
+
+				$mail->Subject = $subject;
+
+				$mail->Body = $body;
+
+				$mail->IsHTML(true);  
+
+				$mail->AddAddress($to);
+
+				if(!$mail->Send()) {
+
+					$error = 'Mail error: '.$mail->ErrorInfo; 
+
+					return false;
+
+				} else {
+
+					$error = 'Message sent!';
+
+					return true;
+
+				}
+
+			}
+
+			$message .= "Bonjour, <br /> Un nouveau tournoi vient de commencer <br /> Titre : ".$tournoi_nom." <br /> Pour vous inscrire rendez vous &agrave; cette URL <br /> http://shyrel.byethost6.com/Pages/inscription_tournoi.php";
+
+			$request = $db->prepare("SELECT Email FROM Users WHERE Email != '' ");
+			$request->execute();
+			$result = $request->fetchAll();
+			foreach ($result as $row) {
+				smtpmailer($row['Email'], 'seillier.benjamin@gmail.com', 'Benjamin SEILLIER', 'Site de pronostique', $message);
+			}
+			
+			}
 		}
-	}
+
 	catch(Exception $e){
 		echo "Erreur dans la cr&eacute;ation du tournoi : ".$e->getMessage();
 	}
