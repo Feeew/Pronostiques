@@ -6,64 +6,47 @@ include '../Scripts/global.php';
 
 include 'header.php';
 	
-$sql = "SELECT * FROM Users";
+$sql = "SELECT * FROM Users WHERE Email = '".$_GET["e"]."' ";
 foreach ($db->query($sql) as $row) {
   if($_GET["e"] == $row['Email']){
     $token = $row['Token'];
   }
 }	
 
-if (isset($_GET["e"]) && isset($_GET["t"]) && $_GET["t"] == $token)
-{
-
+if (isset($_GET["e"]) && isset($_GET["t"]) && $_GET["t"] == $token){
+    if (count($_POST)!=0){
+    	$password = isset($_POST["password"]) ? md5($_POST["password"]) : null;
+    	$password2 = isset($_POST["password2"]) ? md5($_POST["password2"]) : null;
+    	$errors=array();
+      $email = $_GET["e"];
+    	if ($password == null || $password == ""){
+        	$errors['password'] = "Veuillez entrer un mot de passe";
+      }
+    	if ($password2 == null || $password2 == ""){
+        	$errors['password2'] = "Veuillez entrer la confirmation mot de passe";
+      }
+    	if ($password != $password2 ){
+        	$errors['password3'] = "Les deux champs ne sont pas identiques";
+      }
+    	if (count($errors) > 0){
+          $errors['password4'] = "Erreur";
+    	}
+      if ($_GET["t"] == $token){
+        $token2 = "empty";
+        $magic_key = "0c1e2u3m4k5a6d7v8l9m10d11p12";
+        $password = strtoupper(md5(sha1($_POST["password"]).$magic_key));
+        $sql = "UPDATE `Users` SET  Token = '".$token2."', Password = '".$password."' WHERE Email = '".$email."' ";
+        $db->exec($sql);
+        echo '<div class="alert alert-success"><strong>Success!</strong> Votre mot de passe a bien &eacute;t&eacute; modifier.</div>';
+      }  
+      else
+      {
+        $errors['password4'] = "Erreur";
+      }
+    }
 }
-else
-{
+else{
   header('Location: index.php');
-}
-
-if (count($_POST)!=0)
-{
-	$password = isset($_POST["password"]) ? md5($_POST["password"]) : null;
-	$password2 = isset($_POST["password2"]) ? md5($_POST["password2"]) : null;
-	$errors=array();
-  $email = $_GET["e"];
-
-	if ($password == null || $password == "") 
-  {
-    	$errors['password'] = "Veuillez entrer un mot de passe";
-  }
-	if ($password2 == null || $password2 == "") 
-  {
-    	$errors['password2'] = "Veuillez entrer la confirmation mot de passe";
-  }
-	if ($password != $password2 ) 
-  {
-    	$errors['password3'] = "Les deux champs ne sont pas identiques";
-  }
-	if (count($errors) > 0) 
-  {
-      $errors['password4'] = "Erreur";
-	}
-
-  if ($_GET["t"] == $token) 
-  {
-    $token2 = "empty";
-    $magic_key = "0c1e2u3m4k5a6d7v8l9m10d11p12";
-    $password = strtoupper(md5(sha1($_POST["password"]).$magic_key));
-    $sql = "UPDATE `Users` SET  Token = '".$token2."', Password = '".$password."' WHERE Email = '".$email."' ";
-    $db->exec($sql);
-    $res = true;
-  }  
-
-  if ( $res==true)
-  {
-    echo '<div class="alert alert-success"><strong>Success!</strong> Votre mot de passe a bien &eacute;t&eacute; modifier.</div>';
-  }
-  else
-  {
-    $errors['password4'] = "Erreur";
-  }
 }
 
 ?>
