@@ -73,10 +73,10 @@ h1{
 	text-align: center;
 }
 .correct{
-	background-color:green;
+	background-color:green !important;
 }
 .incorrect{
-	background-color:#b00;
+	background-color:#b00  !important;
 }
 .formAjout{ /*User ou Tournoi*/
 	width:250px;
@@ -87,6 +87,22 @@ h1{
 .yellow_line td{
 	background:#f9c66d;
 }
+.choco_line td{
+	background:#5A3A22;
+	color: #efefef;
+}
+.bronze_line td{
+	background:#cd7f32;
+	color: #efefef;
+}
+.silver_line td{
+	background:#059af4;
+	color: #efefef;
+}
+.gold_line td{
+	background:#ffd700;
+}
+
 .th_edit{
 	padding-right:20px !important;
 }

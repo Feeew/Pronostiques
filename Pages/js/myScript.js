@@ -124,6 +124,8 @@ function modifyResult(){
 	var match_id = document.getElementById("mod_id").value;
 	var score1 = document.getElementById("mod_score1").value;
 	var score2 = document.getElementById("mod_score2").value;
+	var phase = document.getElementById("phase").value;
+	console.log(phase);
 	$.ajax({
 		type: "POST",
 		url: "../Scripts/modify_result.php",
@@ -131,7 +133,8 @@ function modifyResult(){
 		data:{
 			match_id:match_id,
 			score1:score1,
-			score2:score2
+			score2:score2,
+			phase:phase,
 		},
 		success: function(){
 			document.getElementById("bugs").innerHTML += "<span style='color:green; font-weight:bold;'>Le résultat du match a correctement été enregistré !</span> <br />";
@@ -163,9 +166,10 @@ function addMatch(){
 			dateMatch:dateMatch
 		},
 		success: function(data){
-			if(confirm("Le match a correctement été ajouté. Rechargez la page ?")){
-				location.reload();
-			}
+			document.getElementById("msg_ajout").innerHTML += "Match ajouté avec succès ! <br>";
+			document.getElementById("Equipe1").value = "";
+			document.getElementById("Equipe2").value = "";
+			document.getElementById("DateMatch").value = "";
 		},
 		fail: function(){
 			document.getElementById("bugs").innerHTML += "<span style='color:red; font-weight:bold;'>Le match n'a pas pu être créé, réessayez ou contactez l'administrateur. </span>  <br />";
