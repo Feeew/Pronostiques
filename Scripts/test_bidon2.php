@@ -10,12 +10,6 @@ require_once('PHPMailer-master/PHPMailerAutoload.php');
 
 
 
-define('GUSER', 'benji.seillier@gmail.com'); // GMail username
-
-define('GPWD', 'paddle62'); // GMail password
-
-
-
 function smtpmailer($to, $from, $from_name, $subject, $body) { 
 
 	global $error;
@@ -24,7 +18,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body) {
 
 	$mail->IsSMTP(); // enable SMTP
 
-	$mail->SMTPDebug = 1;  // debugging: 1 = errors and messages, 2 = messages only
+	$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
 
 	$mail->SMTPAuth = true;  // authentication enabled
 

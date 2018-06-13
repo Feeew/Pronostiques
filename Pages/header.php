@@ -53,6 +53,7 @@
 		?>
 		  <ul class="nav navbar-nav navbar-right">
 		  <li><a href="addUser.php">Pas encore inscrit ?</a></li>
+		  <li><a href="pass_recovery.php">Mot de passe perdu ?</a></li>
 		  </ul>
 		  <form method="post" action="../Scripts/login.php" class="navbar-form" style="float:right;">
 			<div class="form-group">
