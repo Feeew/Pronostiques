@@ -165,11 +165,11 @@ else{
 
 			<tr>
 
-				<th class='th_date'>Date</th>
+				<th class='th_date sticky-header'>Date</th>
 
-				<th class='th_team'>Equipe 1</th>
+				<th class='th_team sticky-header'>Equipe 1</th>
 
-				<th class='th_team'>Equipe 2</th>
+				<th class='th_team sticky-header'>Equipe 2</th>
 
 				<?php
 
@@ -179,13 +179,12 @@ else{
 
 						if(strtoupper($row["Username"]) == strtoupper($_SESSION['username'])) 
 
-							echo "<th colspan='3' class='th_joueur' id='".$row['Username']."' style='font-weight:bold; color:black; text-decoration:underline;' onclick='mod_score(\"".strtoupper($row['Username'])."\")'>".$row["Username"]."</th>";
+							echo "<th colspan='3' class='th_joueur sticky-header' id='".$row['Username']."' style='font-weight:bold; color:black; text-decoration:underline;' onclick='mod_score(\"".strtoupper($row['Username'])."\")'>".substr($row["Username"], 0, 5)."</th>";
 
-						else echo "<th class='th_joueur' colspan='3'>".$row["Username"]."</th>";
+						else echo "<th class='th_joueur sticky-header' colspan='3'>".substr($row["Username"], 0, 5)."</th>";
 
 					}
-
-					echo "<th colspan='2' class='th_resultat'>R&eacute;sultats</th>";
+					echo "<th colspan='2' class='th_resultat sticky-header'>R&eacute;sultats</th>";
 
 			?>
 
@@ -227,7 +226,7 @@ else{
 
 				echo "
 
-							<td class='unirow' title='".$row1["Date"]."'><span style='border-bottom:1px dotted black;'>".date("d-m-Y", strtotime($row1["Date"]))."</span></td>
+							<td class='unirow' title='".$row1["Date"]."'><span style='border-bottom:1px dotted black;'>".date("d-m-y H:i", strtotime($row1["Date"]))."</span></td>
 
 							<td class='unirow'>".$row1["Equipe1"]."</td>
 
@@ -385,7 +384,7 @@ else{
 
 				}
 
-				echo "<td class='result case_result'>".$score_match1."</td><td class='result case_result'>".$score_match2."</td></tr>";
+				echo "<td class='result case_result score_color'>".$score_match1."</td><td class='result case_result score_color'>".$score_match2."</td></tr>";
 
 			}
 
@@ -445,7 +444,7 @@ else{
 
 			<?php
 
-				$messagerie = $db->prepare("SELECT u.Username, m.date, m.message from Messagerie m
+				$messagerie = $db->prepare("SELECT * from Messagerie m
 
 											INNER JOIN Users u ON u.ID = m.idUser
 
@@ -456,14 +455,20 @@ else{
 				$au_moins_un_message = false;
 
 				while($message = $messagerie->fetch()){
+					$modif_msg = none;
+					if ($message["Username"] == strtoupper ($_SESSION['username'] )) {
+						$modif_msg = block;
+					}
 
-					echo "<tr class='tr_input_message'>";
+					echo "<tr id='".$message["id"]."' class='tr_input_message'>";
 
 						echo "<td class='nom_message'>".date("Y-m-d H:i:s", $message["date"])."</td>";
 
 						echo "<td class='nom_message'>".$message["Username"]."</td>";
 
 						echo "<td class='message'>".$message["message"]."</td>";
+
+						echo "<td> <button style ='display:".$modif_msg."'; id='".$message["id"]."' type='button' onclick='modifMessage(".$message["id"].")'>Modifier</button> </td>";
 
 					echo "</tr>";
 
@@ -479,9 +484,9 @@ else{
 
 					<td colspan='99'>
 
-						<input type="text" id="message" name="message" placeholder="Votre message" style="width:93%; text-align:left; padding-left:3px;"/>
+						<input type="text" id="message" name="message" placeholder="Votre message" style="width:90%; text-align:left; padding-left:3px;"/>
 
-						<input type="button" id="buttonAddMessage" value="Envoyer" style="width:7%; float:right;" onclick="addMessage();" />
+						<input type="button" id="buttonAddMessage" value="Envoyer" style="width:10%; float:right;" onclick="addMessage();" />
 
 					</td>
 
@@ -656,7 +661,27 @@ if($_SESSION["grade"]==2) {
 
 </script>
 
-	
+<script>
+$('.message').click(function(){
+    $this = $(this)
+    $this.replaceWith( $('<textarea id="text_change" style="width:100%; height: 100%;" />').val( $this.text() ) )
+})
+
+function modifMessage(id) {
+    var text = $("#text_change").val();
+    var id =  id;
+    console.log(text);
+    console.log(id);
+    $.ajax({
+        url: "ajax_msg.php", 
+        type: "POST",
+		dataType: "json",
+		data: {text: text, id: id},      
+     })
+    $("#text_change").replaceWith( $('<td class= "message" style="width:100%; height: 100%;" />').text( text) )
+}
+
+</script>	
 
 </body>
 
