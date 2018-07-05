@@ -8,6 +8,13 @@
 .navbar-inner{
 	padding-left:50px;
 }
+
+th.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 h1{
 	font-family: 'Architects Daughter', cursive;
 }
@@ -21,6 +28,11 @@ h1{
 .contact_value{
 	padding-left:12px;
 }
+
+.score_color{
+	background-color: burlywood !important;
+}
+
 #wrapper{
 	margin-left:50px;
 	margin-right:37px;
