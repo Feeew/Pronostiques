@@ -25,7 +25,7 @@ include 'header.php';
 
 <div id="content">
 	<?php
-	$sql = "SELECT * FROM Tournoi WHERE ID IN (Select ID_Tournoi FROM Inscriptions WHERE ID_User = (SELECT ID FROM Users WHERE Username = '".strtoupper($_SESSION["username"])."')) AND DateFin > NOW() - 10;";
+	$sql = "SELECT * FROM Tournoi WHERE ID IN (Select ID_Tournoi FROM Inscriptions WHERE ID_User = (SELECT ID FROM Users WHERE Username = '".strtoupper($_SESSION["username"])."')) AND DateFin > NOW() - INTERVAL 1 DAY";
 	$stmt = $db->prepare($sql);
 	$stmt->execute();
 	$result = $stmt->fetchAll();

@@ -455,9 +455,9 @@ else{
 				$au_moins_un_message = false;
 
 				while($message = $messagerie->fetch()){
-					$modif_msg = none;
+					$modif_msg = 'none';
 					if ($message["Username"] == strtoupper ($_SESSION['username'] )) {
-						$modif_msg = block;
+						$modif_msg = 'block';
 					}
 
 					echo "<tr id='".$message["id"]."' class='tr_input_message'>";
@@ -658,14 +658,6 @@ if($_SESSION["grade"]==2) {
 		}
 
 	});
-
-</script>
-
-<script>
-$('.message').click(function(){
-    $this = $(this)
-    $this.replaceWith( $('<textarea id="text_change" style="width:100%; height: 100%;" />').val( $this.text() ) )
-})
 
 function modifMessage(id) {
     var text = $("#text_change").val();
