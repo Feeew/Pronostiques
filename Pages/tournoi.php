@@ -468,7 +468,7 @@ else{
 
 						echo "<td class='message'>".$message["message"]."</td>";
 
-						echo "<td> <button style ='display:".$modif_msg."'; id='".$message["id"]."' type='button' onclick='modifMessage(".$message["id"].")'>Modifier</button> </td>";
+						//echo "<td> <button style ='display:".$modif_msg."'; id='".$message["id"]."' type='button' onclick='modifMessage(".$message["id"].")'>Modifier</button> </td>";
 
 					echo "</tr>";
 
