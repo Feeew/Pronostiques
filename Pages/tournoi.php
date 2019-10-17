@@ -1,7 +1,7 @@
 <?php 
 
 include 'session_start.php';
-
+include '../Objets/Match.php';
 include '../Scripts/test_session.php';
 
 ?>
@@ -194,7 +194,7 @@ else{
 
 		<?php 
 
-			if($_SESSION["grade"]==2) $options = "";
+			if($_SESSION["grade"]==2) $options = array();
 
 			date_default_timezone_set('CET');
 
@@ -237,9 +237,8 @@ else{
 				if($_SESSION["grade"]==2 && (date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"])) || strtotime(date("d-m-Y")) > strtotime($row1["Date"]))) 
 
 					{
-
-						$options.="<option value='".$row1["ID"]."'>".$row1["Equipe1"]." / ".$row1["Equipe2"]."</option>";
-
+						$Match = new Match($row1["ID"], $row1["Equipe1"], $row1["Equipe2"]);
+						array_push($options, $Match);
 					}
 
 				//Boucle qui parcourt tous les joueurs pour chaque match
@@ -252,7 +251,7 @@ else{
 
 						$result_scores = $scores->fetchAll();
 
-						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s", strtotime("+1 hour"))) ? "1" : "0";
+						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s")) ? "1" : "0";
 
 						$score1 = $result_scores[0]["Score1"];
 
@@ -347,12 +346,6 @@ else{
 							}
 
 						}
-
-
-
-// || ($_SESSION['username'] == "Akiah" && $sport == "Rugby")
-
-						
 
 						//Si l'utilisateur connecté est celui dont on affiche les résultats
 
@@ -524,11 +517,25 @@ if($_SESSION["grade"]==2) {
 
 	<form method="post" id="form_mod_result">
 
-		<h4>Changer le r&eacute;sultat d'un match</h4><br />
+		<h4>Changer le r&eacute;sultat d'un match222</h4><br />
+
+<?
+
+?>
 
 		<select id="mod_id">
 
-			<?php echo $options;?>
+			<?php 
+
+				function cmp($a, $b) {
+					return $b->id - $a->id;
+				}
+				usort($options, "cmp");
+				
+				foreach($options as $match)
+					echo "<option value='".$match->getId()."'>".$match->getEquipe1()." / ".$match->getEquipe2()."</option>";
+			
+			?>
 
 		</select>
 
