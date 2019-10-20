@@ -207,19 +207,21 @@ else{
 
 				$phase = ($row1["phase"] != null) ? $row1["phase"] : "";
 
+				$match_termine = ($row1["Date"]<date("Y-m-d H:i:s")) ? "1" : "0";
+
 				if((date("d-m-Y") == date("d-m-Y", strtotime($row1["Date"]))) && ($score_match1=="-" && $score_match2=="-"))
 
 					echo "<tr class='yellow_line en_cours' id=".$row1["ID"].">";
 
 				else if((strtotime(date("d-m-Y")) < strtotime($row1["Date"]))&&($phase == "none"))
 						echo "<tr id=".$row1["ID"]." class='en_cours'>";
-				else if((strtotime(date("d-m-Y")) >= strtotime($row1["Date"]))&&($phase == "8eme"))
+				else if((strtotime(date("d-m-Y")) >= strtotime($row1["Date"]) OR $match_termine == 1)&&($phase == "8eme"))
 						echo "<tr id=".$row1["ID"]." class='choco_line'>";
-				else if((strtotime(date("d-m-Y")) >= strtotime($row1["Date"]))&&($phase == "4eme"))
+				else if((strtotime(date("d-m-Y")) >= strtotime($row1["Date"]) OR $match_termine == 1)&&($phase == "4eme"))
 						echo "<tr id=".$row1["ID"]." class='bronze_line'>";
-				else if((strtotime(date("d-m-Y")) >= strtotime($row1["Date"]))&&($phase == "2eme"))
+				else if((strtotime(date("d-m-Y")) >= strtotime($row1["Date"]) OR $match_termine == 1)&&($phase == "2eme"))
 						echo "<tr id=".$row1["ID"]." class='silver_line'>";
-				else if((strtotime(date("d-m-Y")) >= strtotime($row1["Date"]))&&($phase == "1eme"))
+				else if((strtotime(date("d-m-Y")) >= strtotime($row1["Date"]) OR $match_termine == 1)&&($phase == "1eme"))
 						echo "<tr id=".$row1["ID"]." class='gold_line'>";
 
 				else echo "<tr id=".$row1["ID"].">";
@@ -250,8 +252,6 @@ else{
 						$scores->execute();
 
 						$result_scores = $scores->fetchAll();
-
-						$match_termine = ($row1["Date"]<date("Y-m-d H:i:s")) ? "1" : "0";
 
 						$score1 = $result_scores[0]["Score1"];
 
@@ -320,16 +320,17 @@ else{
 
 									if($score1 == $score_match1 && $score2 == $score_match2)
 										$points += 2;
-									if($phase == "8eme")
-										$points = $points * 2;
-									else if($phase == "4eme")
-										$points = $points * 3;
-									else if($phase == "2eme")
-										$points = $points * 4;
-									else if($phase == "1eme")
-										$points = $points * 5;
-
 								}
+								
+								
+								if($phase == "8eme")
+									$points = $points * 2;
+								else if($phase == "4eme")
+									$points = $points * 3;
+								else if($phase == "2eme")
+									$points = $points * 4;
+								else if($phase == "1eme")
+									$points = $points * 5;
 
 								
 								$str_points="<td class='correct case_result'>".$points."</td>";
